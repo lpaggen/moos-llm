@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "scenario_id": "VHF-03",
+  "title": "Temporary VTS hold and subsequent release",
+  "safety_constraints": {
+    "entry_boundary": {
+      "y_m": -1000,
+      "hold_until_event": "vts_fairway_release"
+    }
+  },
+  "events": [
+    {
+      "event_id": "vts_hold_south_of_entry",
+      "channel": 12,
+      "trigger": {
+        "own_y_gte_m": -1800
+      },
+      "transcript": "ALPHA, this is Harbour VTS. INSTRUCTION. Do not enter the fairway. Remain in the designated holding area west and south of the entrance and await further instructions. OUTBOUND traffic is departing. Over.",
+      "expected_interpretation": {
+        "speaker": "Harbour VTS",
+        "addressee": "ALPHA",
+        "intent": "instruction",
+        "requested_action": "stop",
+        "directive_lifetime": "until_cancelled",
+        "directive_end_condition": null,
+        "relay_required": true,
+        "recommended_action": "stop"
+      },
+      "expected_response": "Acknowledge the restriction and stop or otherwise hold south of the y equals minus one thousand metre entry boundary without creating a new collision risk.",
+      "response_policy": "acknowledgement",
+      "response_terms": ["holding", "will hold", "remain clear", "standing by", "roger"]
+    },
+    {
+      "event_id": "vts_fairway_release",
+      "channel": 12,
+      "trigger": {
+        "contact": "OUTBOUND",
+        "contact_y_lte_m": -1500
+      },
+      "transcript": "ALPHA, this is Harbour VTS. INFORMATION. OUTBOUND traffic has cleared the fairway. INSTRUCTION. You may proceed inbound. Over.",
+      "expected_interpretation": {
+        "speaker": "Harbour VTS",
+        "addressee": "ALPHA",
+        "intent": "instruction",
+        "requested_action": "proceed",
+        "directive_lifetime": "transient",
+        "directive_end_condition": null,
+        "relay_required": true,
+        "recommended_action": "resume"
+      },
+      "expected_response": "Acknowledge the release, reassess the observed traffic, resume when safe, enter the fairway, and complete the passage.",
+      "response_policy": "acknowledgement",
+      "response_terms": ["proceeding", "proceed inbound", "resuming", "roger", "wilco"]
+    }
+  ]
+}

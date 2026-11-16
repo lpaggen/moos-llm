@@ -1,0 +1,147 @@
+{
+  "case": "case_09",
+  "unit": "nm",
+  "layout": "panels",
+  "note": "Local simulation coordinates; straight segments connect logged observations. No smoothing, inferred coastlines, or unobserved route extension.",
+  "moment_note": "A and B mark arrow-tip snapshots within each run. Contact positions are as reported in that same bridge snapshot, without interpolation. Moments are selected independently per run, not synchronized across models.",
+  "runs": [
+    {
+      "label": "MOOS-IvP",
+      "log": "/home/lpagg/projects/moos-llm/logs/evaluations/imazu/moos_ivp_colregs_baseline/case_09/telemetry.jsonl",
+      "own_ship_samples": 119,
+      "outcome": "Mission complete",
+      "arrow_moments": [
+        {
+          "moment": "A",
+          "sample_index": 35,
+          "observed_at": 89531119093.04695,
+          "own_ship": [
+            -746.8096876661178,
+            -1588.9860966855483
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              457.36,
+              -792.04
+            ],
+            "IMAZU_TS2": [
+              1078.11,
+              -0.01
+            ]
+          }
+        },
+        {
+          "moment": "B",
+          "sample_index": 76,
+          "observed_at": 89531120119.60576,
+          "own_ship": [
+            -3188.9461626434027,
+            1502.431161807214
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              -2108.85,
+              3652.77
+            ],
+            "IMAZU_TS2": [
+              -4049.12,
+              0.0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Qwen3-8B + COLREG RAG",
+      "log": "/home/lpagg/projects/moos-llm/logs/evaluations/imazu/qwen3_8b_colregs_rag/case_09/audit.jsonl",
+      "own_ship_samples": 101,
+      "outcome": "Mission complete",
+      "arrow_moments": [
+        {
+          "moment": "A",
+          "sample_index": 30,
+          "observed_at": 8953454986.66762,
+          "own_ship": [
+            219.0822799837036,
+            -1288.3073482844356
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              239.07,
+              -413.96
+            ],
+            "IMAZU_TS2": [
+              506.41,
+              0.0
+            ]
+          }
+        },
+        {
+          "moment": "B",
+          "sample_index": 65,
+          "observed_at": 8953455693.194765,
+          "own_ship": [
+            359.0430296916855,
+            2008.6176717005837
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              -1526.68,
+              2644.42
+            ],
+            "IMAZU_TS2": [
+              -3024.77,
+              0.0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Qwen3-8B fine-tuned",
+      "log": "/home/lpagg/projects/moos-llm/logs/evaluations/imazu/20261005T103227Z_finetuned/case_09/audit.jsonl",
+      "own_ship_samples": 86,
+      "outcome": "Mission complete",
+      "arrow_moments": [
+        {
+          "moment": "A",
+          "sample_index": 25,
+          "observed_at": 8956006231.475014,
+          "own_ship": [
+            911.6379015901773,
+            -2207.838701026998
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              857.34,
+              -1484.84
+            ],
+            "IMAZU_TS2": [
+              1741.24,
+              -0.01
+            ]
+          }
+        },
+        {
+          "moment": "B",
+          "sample_index": 55,
+          "observed_at": 8956007042.352264,
+          "own_ship": [
+            926.8287125049361,
+            1355.3131178045555
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              -1170.04,
+              2026.75
+            ],
+            "IMAZU_TS2": [
+              -2313.68,
+              0.02
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

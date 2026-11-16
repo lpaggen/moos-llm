@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Source-grounded maritime reasoning record",
+  "type": "object",
+  "required": [
+    "record_id",
+    "record_type",
+    "source",
+    "situation",
+    "reasoning",
+    "evidence",
+    "quality",
+    "agent_use_contract"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string"
+    },
+    "record_type": {
+      "const": "source_grounded_maritime_reasoning_record"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "report_title",
+        "source_file",
+        "pages",
+        "document_modalities_present"
+      ],
+      "properties": {
+        "report_title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_file": {
+          "type": "string"
+        },
+        "pages": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 1
+        },
+        "document_modalities_present": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "situation": {
+      "type": "object",
+      "required": [
+        "encounter_types",
+        "roles",
+        "encounter_phases",
+        "warning_signs"
+      ],
+      "properties": {
+        "encounter_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "encounter_phases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warning_signs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "reasoning": {
+      "type": "object",
+      "required": [
+        "causal_mechanisms",
+        "investigator_finding",
+        "transferable_lesson",
+        "non_transfer_conditions"
+      ],
+      "properties": {
+        "causal_mechanisms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "investigator_finding": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "transferable_lesson": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "non_transfer_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "page",
+          "modality",
+          "quote",
+          "quote_reverified_against_local_index",
+          "page_visual_context"
+        ],
+        "properties": {
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "modality": {
+            "const": "text"
+          },
+          "quote": {
+            "type": "string",
+            "minLength": 8
+          },
+          "quote_reverified_against_local_index": {
+            "type": "boolean"
+          },
+          "page_visual_context": {
+            "type": "object",
+            "required": [
+              "embedded_image_objects",
+              "table_or_structured_layout_cue",
+              "visual_content_interpreted"
+            ],
+            "properties": {
+              "embedded_image_objects": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "table_or_structured_layout_cue": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "visual_content_interpreted": {
+                "const": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "quality": {
+      "type": "object",
+      "required": [
+        "source_review_status",
+        "all_quotes_reverified_against_local_index",
+        "human_review_required",
+        "visual_semantics_validated"
+      ],
+      "properties": {
+        "source_review_status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "all_quotes_reverified_against_local_index": {
+          "type": "boolean"
+        },
+        "human_review_required": {
+          "const": true
+        },
+        "visual_semantics_validated": {
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "agent_use_contract": {
+      "type": "object",
+      "required": [
+        "use",
+        "live_observations_and_current_regulations_remain_authoritative",
+        "must_check_non_transfer_conditions",
+        "must_not_infer_unseen_visual_content"
+      ],
+      "properties": {
+        "use": {
+          "const": "advisory precedent for reasoning or critic review"
+        },
+        "live_observations_and_current_regulations_remain_authoritative": {
+          "const": true
+        },
+        "must_check_non_transfer_conditions": {
+          "const": true
+        },
+        "must_not_infer_unseen_visual_content": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "scenario_id": "VHF-01",
+  "title": "Stand-on vessel receives a justified avoidance request",
+  "events": [
+    {
+      "event_id": "bravo_justified_starboard_request",
+      "channel": 13,
+      "trigger": {
+        "contact": "BRAVO",
+        "range_lte_m": 1500
+      },
+      "transcript": "ALPHA, this is BRAVO. REQUEST. Please alter your course to starboard. I have CHARLIE close on my starboard side and cannot safely alter to starboard. Over.",
+      "expected_interpretation": {
+        "speaker": "BRAVO",
+        "addressee": "ALPHA",
+        "intent": "maneuver_request",
+        "requested_action": "alter_course",
+        "requested_turn_direction": "starboard"
+      },
+      "expected_response": "Verify BRAVO and CHARLIE against the tracked traffic, acknowledge the request, and make the requested starboard alteration only if the complete observed geometry remains safe.",
+      "response_policy": "acknowledgement",
+      "response_terms": ["BRAVO", "starboard", "roger", "wilco"],
+      "required_outcome": {
+        "alteration_direction": "starboard"
+      },
+      "forbidden_outcome": "Blind compliance without checking that the starboard alteration is safe across both BRAVO and CHARLIE."
+    }
+  ]
+}

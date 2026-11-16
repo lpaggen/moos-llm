@@ -1,0 +1,11 @@
+// Rotterdam to Den Helder coastal corridor.
+// Bounds read from rotterdam_denhelder.tif (EPSG:3857).
+
+// Keep the image origin aligned with the mission geodesy in plugs.moos.
+datum_lat = 51.88621810
+datum_lon = 4.44159844
+
+lat_north = 53.25000000
+lat_south = 51.70000000
+lon_west  = 3.20000000
+lon_east  = 5.20000000

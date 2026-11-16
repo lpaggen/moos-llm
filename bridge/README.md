@@ -1,0 +1,1 @@
+The bridge just relays information between Python and C++. Python needs info from C++ to give agents information about the environment and the ship, and C++ needs the python commands to speak to the ship and make it react.

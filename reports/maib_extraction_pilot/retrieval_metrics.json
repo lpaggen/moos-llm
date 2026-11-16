@@ -1,0 +1,63 @@
+{
+  "queries": 503,
+  "mean_metrics": {
+    "bm25": {
+      "hit_at_1": 0.13916500994035785,
+      "hit_at_3": 0.4234592445328032,
+      "hit_at_5": 0.6520874751491054,
+      "gold_page_recall_at_5": 0.56129887342611,
+      "mrr": 0.3491596199280722,
+      "ndcg_at_5": 0.35510338137816594
+    },
+    "dense": {
+      "hit_at_1": 0.11332007952286283,
+      "hit_at_3": 0.35785288270377735,
+      "hit_at_5": 0.5646123260437376,
+      "gold_page_recall_at_5": 0.48939695162359176,
+      "mrr": 0.31392050543066125,
+      "ndcg_at_5": 0.3084966864364801
+    },
+    "rrf": {
+      "hit_at_1": 0.12524850894632206,
+      "hit_at_3": 0.4294234592445328,
+      "hit_at_5": 0.5924453280318092,
+      "gold_page_recall_at_5": 0.5218687872763419,
+      "mrr": 0.3364137144198719,
+      "ndcg_at_5": 0.3361244225651829
+    },
+    "reranked": {
+      "hit_at_1": 0.10934393638170974,
+      "hit_at_3": 0.40556660039761433,
+      "hit_at_5": 0.6043737574552683,
+      "gold_page_recall_at_5": 0.5165672630881378,
+      "mrr": 0.3239167758148757,
+      "ndcg_at_5": 0.3222926461820985
+    }
+  },
+  "reranker_vs_rrf_report_cluster_bootstrap": {
+    "hit_at_5": {
+      "observed_delta": 0.011928429423459244,
+      "bootstrap_95_low": -0.055441478439425054,
+      "bootstrap_95_high": 0.07468879668049792,
+      "clusters": 101
+    },
+    "mrr": {
+      "observed_delta": -0.01249693860499614,
+      "bootstrap_95_low": -0.041370743436836034,
+      "bootstrap_95_high": 0.016964566850996673,
+      "clusters": 101
+    },
+    "ndcg_at_5": {
+      "observed_delta": -0.01383177638308437,
+      "bootstrap_95_low": -0.050690295948539604,
+      "bootstrap_95_high": 0.02377431977093645,
+      "clusters": 101
+    }
+  },
+  "benchmark_caveat": "The query is schema-derived and independent of card contents. Gold pages come from machine-generated cards whose quotations passed exact page validation, so the benchmark still requires confirmation on a manually annotated held-out set.",
+  "timings": {
+    "dense_query_encoding_seconds": 4.723679000991979,
+    "cross_encoder_seconds": 236.6335591990064,
+    "cross_encoder_pairs": 9082
+  }
+}

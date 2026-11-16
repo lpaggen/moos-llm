@@ -1,0 +1,278 @@
+//-------------------------------------------------
+// Vehicle Helm config file
+// M. Benjamin, MIT
+
+// Default values for the crossing mission.
+// LLM_CONTROL is initialized false so the normal crossing behavior runs
+// until an LLM-side process explicitly activates LLM control.
+#ifdef MMOD baseline
+// Baseline runs start from mission state. At high time warp an external
+// uPokeDB deployment can arrive after its MOOS timestamp has gone stale.
+initialize  DEPLOY       = true
+initialize  MOOS_MANUAL_OVERRIDE = false
+#else
+initialize  DEPLOY       = $(START_DEPLOYED:=false)
+#endif
+initialize  RETURN       = false
+initialize  STATION_KEEP = false
+initialize  LOITER       = false
+initialize  AVOID        = $(AVOID:=true)
+initialize  LLM_CONTROL  = false
+initialize  LLM_STOP     = false
+
+set MODE = ACTIVE {
+  DEPLOY = true
+} INACTIVE
+
+// Normal crossing is a sibling of station/return/loiter, not the ACTIVE
+// parent itself. Conditions on MODE==ACTIVE also match child modes.
+set MODE = TRANSITING {
+  MODE = ACTIVE
+  RETURN = false
+  STATION_KEEP = false
+  LOITER = false
+  LLM_CONTROL = false
+  LLM_STOP = false
+}
+
+set MODE = STATION-KEEPING {
+  MODE = ACTIVE
+  STATION_KEEP = true
+}                       
+
+set MODE = RETURNING {
+  MODE = ACTIVE
+  RETURN = true
+} 
+
+set MODE = LOITERING {
+  MODE = ACTIVE
+  LOITER = true
+} 
+
+// Keep LLM control as a proper child mode, following the m2_berta pattern.
+// This makes behavior ownership explicit instead of relying on update order.
+set MODE = LLM_ACTIVE {
+  MODE = ACTIVE
+  LLM_CONTROL = true
+  LLM_STOP = false
+  LOITER = false
+  RETURN = false
+  STATION_KEEP = false
+}
+
+// Full stop is also a helm mode. BHV_FullStop remains in control of the PID
+// and continuously produces a zero-speed objective.
+set MODE = STOPPED {
+  MODE = ACTIVE
+  LLM_STOP = true
+}
+
+
+//----------------------------------------------
+Behavior = BHV_Loiter
+{
+  name      = loiter
+  pwt       = 100
+  condition = MODE==LOITERING
+  condition = LLM_CONTROL = false
+  condition = LLM_STOP = false
+  updates   = UP_LOITER
+  runflag   = VEHICLE_UNDERWAY = TRUE
+  endflag   = VEHICLE_UNDERWAY = FALSE
+
+  ipf_type = zaic_spd
+	
+   post_suffix = A
+         speed = $(STOCK_SPD:=1.4)
+     clockwise = false
+        radius = 8.0
+     nm_radius = 15.0
+       polygon = radial:: $(LOITER_POS), radius=20, pts=8, snap=1, label=$(VNAME)_LOITER
+  visual_hints = nextpt_color=white, nextpt_lcolor=khaki
+  visual_hints = edge_color=orange, vertex_color=white
+  visual_hints = edge_size=1, vertex_size=2
+}
+
+//----------------------------------------------
+#ifdef MMOD baseline
+Behavior = BHV_AvdColregsV22
+{
+  name       = avdcol_
+  pwt        = 150
+  condition  = AVOID = true 
+  condition  = MODE==ACTIVE
+  // In LLM mode this behavior must not contribute a competing helm IPF.
+  // It remains active as the sole collision controller in MOOS baseline mode.
+  condition  = LLM_CONTROL = false
+  condition  = LLM_STOP = false
+  updates    = CONTACT_INFO
+  templating = spawn
+
+	spawnxflag = INFO=os=$[OWNSHIP],utc=$[UTC],range=$[RANGE],contact=$[CONTACT],cn_os_rel_bng=$[CN_OS_REL_BNG],os_cn_rel_bng=$[OS_CN_REL_BNG]
+             contact = to-be-set
+    on_no_contact_ok = true
+         extrapolate = true
+               decay = 30,60
+
+            runxflag = STATUS={"TargetId":"$[CN_NAME]", "Priority":"$[APWT]", "Mode":"$[FULL_MODE]", "ModeId":"$[MODE_ID]"}
+	
+	       //match_group = alpha
+        //  match_type = mokai
+
+	can_disable = true
+	
+	exit_on_filter_group = true
+	
+	post_per_contact_info = true
+	
+  use_refinery = true
+
+        // IMAZU safety domain: begin acting at 1.0 NM, reach full
+        // relevance at 0.5 NM, and optimize for a 0.5-1.0 NM CPA.
+        pwt_outer_dist = 1852
+        pwt_inner_dist = 926
+        completed_dist = 1852
+
+  min_util_cpa_dist = 926
+     max_util_cpa_dist = 1852
+             pwt_grade = linear
+   bearing_line_config = white:0, green:0.65, yellow:0.8, red:1.0
+}
+
+//----------------------------------------------
+// Static obstacle avoidance. pObstacleMgr spawns one instance per nearby
+// convex polygon through OBSTACLE_ALERT.
+Behavior = BHV_AvoidObstacleV24
+{
+  name       = avd_obstacle_
+  pwt        = 500
+  condition  = AVOID = true
+  condition  = MODE==ACTIVE
+  condition  = LLM_CONTROL = false
+  condition  = LLM_STOP = false
+  templating = spawn
+  updates    = OBSTACLE_ALERT
+
+  use_refinery      = true
+  allowable_ttc     = 10
+  min_util_cpa_dist = 15
+  max_util_cpa_dist = 30
+  pwt_outer_dist    = 150
+  pwt_inner_dist    = 75
+  completed_dist    = 200
+}
+#endif
+
+//----------------------------------------------
+// Original crossing objective. This pauses while an LLM waypoint detour
+// is active, then resumes from the vessel's current position.
+Behavior = BHV_Waypoint
+{
+  name      = crossing_wpt
+  pwt       = 100
+  condition = MODE==TRANSITING
+  updates   = UP_CROSSING
+
+  runflag   = VEHICLE_UNDERWAY = TRUE
+  runflag   = MISSION_OBJECTIVE = $(CROSS_POINT)
+  activeflag = MISSION_ROUTE = $(CROSS_ROUTE)
+  endflag   = VEHICLE_UNDERWAY = FALSE
+  endflag   = MISSION_COMPLETE = TRUE
+
+  speed     = $(STOCK_SPD:=1.4)
+  radius    = $(OBJECTIVE_RADIUS)
+  nm_radius = $(OBJECTIVE_NM_RADIUS)
+  $(CROSS_ROUTE)
+  // Look slightly farther down-track to soften heading corrections.
+  lead      = 50
+  post_suffix = _CROSSING
+  visual_hints = label_color=off, nextpt_label_color=off
+  visual_hints = edge_color=$(ROUTE_EDGE_COLOR), vertex_color=$(ROUTE_VERTEX_COLOR)
+  visual_hints = vertex_size=$(ROUTE_VERTEX_SIZE), nextpt_color=$(ROUTE_NEXTPT_COLOR)
+}
+
+//----------------------------------------------
+// Temporary LLM waypoint objective. Post LLM_CONTROL=true and update
+// LLM_WPT with point=<x>,<y> or points=<x>,<y>. On arrival, this clears
+// LLM control so crossing_wpt resumes toward the original objective.
+Behavior = BHV_Waypoint
+{
+  name      = llm_wpt
+  pwt       = 100
+  condition = MODE==LLM_ACTIVE
+  updates   = LLM_WPT
+  perpetual = true
+
+  runflag   = VEHICLE_UNDERWAY = TRUE
+  endflag   = VEHICLE_UNDERWAY = FALSE
+  endflag   = LLM_CONTROL = false
+  endflag   = LLM_MANEUVER_DONE = true
+
+  speed     = $(STOCK_SPD:=1.4)
+  radius    = 20.0
+  nm_radius = 40.0
+  $(CROSS_ROUTE)
+  // Match normal transit lookahead for smooth entry into maneuver arcs.
+  lead      = 50
+  visual_hints = label_color=off, nextpt_label_color=off
+  visual_hints = edge_color=orange, vertex_color=orange, nextpt_color=orange
+  visual_hints = vertex_size=3
+}
+
+//----------------------------------------------
+Behavior = BHV_Waypoint
+{
+  name        = waypt_return
+  pwt         = 100
+  updates     = RETURN_UPDATES
+  condition   = MODE==RETURNING
+  condition   = LLM_CONTROL = false
+  condition   = LLM_STOP = false
+  endflag     = LLM_STOP = false
+  endflag     = AVOID = false
+	spawnx_flag = RETURN_UPDATES=point=$[OSX],$[OSY]
+	
+      speed = $(STOCK_SPD:=1.4)
+     radius = 20.0
+  nm_radius = 40.0
+      point = 0,0
+       lead = 50
+}
+
+//----------------------------------------------
+Behavior = BHV_StationKeep
+{
+  name         = station-keep
+  pwt          = 100
+  condition    = MODE==STATION-KEEPING
+  inactiveflag = STATIONING = false
+  activeflag   = STATIONING = true
+
+  center_activate = true
+        inner_radius = 5
+        outer_radius = 10 
+         outer_speed = 0.3
+
+       transit_speed = 0.3
+          swing_time = 7
+        visual_hints = vertex_size=0, edge_color=gray50
+}
+
+//----------------------------------------------
+// A real zero-speed helm objective. Unlike MOOS_MANUAL_OVERRIDE, this keeps
+// pHelmIvP and pMarinePID engaged so thrust is actively driven to zero.
+Behavior = BHV_FullStop
+{
+  name           = llm_full_stop
+  pwt            = 1000
+  condition      = MODE==STOPPED
+  perpetual      = true
+  stop_thresh    = 0.05
+  delay_complete = 0.5
+  visual_hints   = vertex_size=0, label_color=off
+}
+
+//---- LLM redirect note ----//
+// LLM_WPT controls only the temporary llm_wpt behavior. When it completes,
+// LLM_CONTROL is cleared and the original crossing_wpt resumes.

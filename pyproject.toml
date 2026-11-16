@@ -1,0 +1,35 @@
+[project]
+name = "moos-llm"
+version = "0.1.0"
+description = "Multi-agent framework to talk to a MOOS app and let an LLM command a virtual ship"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "faster-whisper>=1.2.1",
+    "nvidia-cublas-cu12>=12.9.2.10",
+    "nvidia-cuda-nvrtc>=13.0.88",
+    "nvidia-cudnn-cu12==9.*",
+    "openai>=2.44.0",
+    "openai-whisper>=20250625",
+    "pydantic>=2.13.4",
+    "python-dotenv>=1.2.2",
+    "sounddevice>=0.5.3",
+    "torchcodec>=0.14",
+    "vllm>=0.25.0",
+    "pydantic>=2.13.4",
+    "pypdf>=6.18.0",
+    "fonttools>=4.64.0",
+    "sentence-transformers>=6.0.1",
+    "env>=0.1.0",
+]
+
+[project.optional-dependencies]
+plot = ["matplotlib>=3.8"]
+train = [
+    "accelerate>=1.10.0",
+    "bitsandbytes>=0.46.1",
+    "datasets>=4.0.0",
+    "peft>=0.17.0",
+    "transformers>=4.55.0",
+    "trl>=0.28.0",
+]

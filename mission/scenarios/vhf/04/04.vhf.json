@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "scenario_id": "VHF-04",
+  "title": "Ambiguous request in multi-vessel traffic",
+  "events": [
+    {
+      "event_id": "meridian_ambiguous_port_request",
+      "channel": 13,
+      "trigger": {
+        "contact": "ECHO",
+        "range_lte_m": 1800
+      },
+      "transcript": "Northbound vessel near the harbour entrance, this is motor vessel MERIDIAN. REQUEST. Alter your course to port. Over.",
+      "expected_interpretation": {
+        "speaker": "MERIDIAN",
+        "addressee": "Northbound vessel near the harbour entrance",
+        "identity_status": "ambiguous",
+        "intent": "maneuver_request",
+        "requested_action": "alter_course",
+        "requested_turn_direction": "port",
+        "clarification_required": true
+      },
+      "expected_response": "Do not assume the request is addressed to ALPHA. Request positive identification or position information while continuing to assess ECHO, FOXTROT, and NORDIC independently.",
+      "response_policy": "clarification",
+      "response_terms": ["identify", "confirm", "position", "which vessel", "clarify", "say again"],
+      "forbidden_outcome": "Executing the requested port alteration solely because it sounds plausible for one of the two northbound vessels."
+    }
+  ]
+}

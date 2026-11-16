@@ -1,0 +1,13 @@
+// Rotterdam to Den Helder coastal corridor.
+// OpenStreetMap background generated with tms2geotiff.py.
+// Requested geographic bounds:
+// NW: 53.15, 3.45
+// SE: 51.75, 5.05
+
+datum_lat = 52.45000000
+datum_lon = 4.25000000
+
+lat_north = 53.15000000
+lat_south = 51.75000000
+lon_west  = 3.45000000
+lon_east  = 5.05000000

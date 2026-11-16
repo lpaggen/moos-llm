@@ -1,0 +1,171 @@
+{
+  "case": "case_21",
+  "unit": "nm",
+  "layout": "panels",
+  "note": "Local simulation coordinates; straight segments connect logged observations. No smoothing, inferred coastlines, or unobserved route extension.",
+  "moment_note": "A and B mark arrow-tip snapshots within each run. Contact positions are as reported in that same bridge snapshot, without interpolation. Moments are selected independently per run, not synchronized across models.",
+  "runs": [
+    {
+      "label": "MOOS-IvP",
+      "log": "/home/lpagg/projects/moos-llm/logs/evaluations/imazu/moos_ivp_colregs_baseline/case_21/telemetry.jsonl",
+      "own_ship_samples": 106,
+      "outcome": "Mission complete",
+      "arrow_moments": [
+        {
+          "moment": "A",
+          "sample_index": 31,
+          "observed_at": 89531196381.14745,
+          "own_ship": [
+            -341.38264652221534,
+            -3001.888257653384
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              363.3,
+              -1355.99
+            ],
+            "IMAZU_TS2": [
+              -403.69,
+              -1506.66
+            ],
+            "IMAZU_TS3": [
+              1725.28,
+              -0.01
+            ]
+          }
+        },
+        {
+          "moment": "B",
+          "sample_index": 68,
+          "observed_at": 89531197306.04724,
+          "own_ship": [
+            123.47724861064361,
+            1014.1723168995449
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              -834.85,
+              3115.59
+            ],
+            "IMAZU_TS2": [
+              794.35,
+              2964.44
+            ],
+            "IMAZU_TS3": [
+              -2903.23,
+              0.0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Qwen3-8B + COLREG RAG",
+      "log": "/home/lpagg/projects/moos-llm/logs/evaluations/imazu/qwen3_8b_colregs_rag/case_21/audit.jsonl",
+      "own_ship_samples": 104,
+      "outcome": "Mission complete",
+      "arrow_moments": [
+        {
+          "moment": "A",
+          "sample_index": 30,
+          "observed_at": 8953489252.927534,
+          "own_ship": [
+            0.0,
+            -2352.793055646523
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              287.18,
+              -1071.92
+            ],
+            "IMAZU_TS2": [
+              -294.14,
+              -1097.81
+            ],
+            "IMAZU_TS3": [
+              1164.28,
+              -0.01
+            ]
+          }
+        },
+        {
+          "moment": "B",
+          "sample_index": 66,
+          "observed_at": 8953490142.32452,
+          "own_ship": [
+            0.0,
+            1467.8560496044402
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              -863.45,
+              3222.34
+            ],
+            "IMAZU_TS2": [
+              856.58,
+              3196.68
+            ],
+            "IMAZU_TS3": [
+              -3282.63,
+              0.0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Qwen3-8B fine-tuned",
+      "log": "/home/lpagg/projects/moos-llm/logs/evaluations/imazu/20261005T103227Z_finetuned/case_21/audit.jsonl",
+      "own_ship_samples": 80,
+      "outcome": "Mission complete",
+      "arrow_moments": [
+        {
+          "moment": "A",
+          "sample_index": 23,
+          "observed_at": 8956053162.85397,
+          "own_ship": [
+            576.4706364262578,
+            -2239.0550161413885
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              502.3,
+              -1874.78
+            ],
+            "IMAZU_TS2": [
+              -508.97,
+              -1899.54
+            ],
+            "IMAZU_TS3": [
+              1993.39,
+              -0.02
+            ]
+          }
+        },
+        {
+          "moment": "B",
+          "sample_index": 51,
+          "observed_at": 8956054061.83091,
+          "own_ship": [
+            1247.5653204458135,
+            1323.2281868355626
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              -661.43,
+              2468.39
+            ],
+            "IMAZU_TS2": [
+              654.8,
+              2443.63
+            ],
+            "IMAZU_TS3": [
+              -2502.95,
+              0.02
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

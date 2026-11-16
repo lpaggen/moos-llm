@@ -1,0 +1,18 @@
+{
+  "ready_for_training": true,
+  "source_minimum_clearance_m": 500.0,
+  "system_prompt_sha256": "d9a01f8c197aa0a48d2880ca6486539bc0189f4e77df20df28884137841d3bd8",
+  "train_actions": {
+    "alter_course": 497,
+    "maintain_course": 4831,
+    "rejoin_route": 288,
+    "resume": 6,
+    "set_speed": 242,
+    "stop": 1
+  },
+  "alter_course_directions": {
+    "port": 5,
+    "starboard": 492
+  },
+  "failures": []
+}

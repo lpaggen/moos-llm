@@ -1,0 +1,3 @@
+// VHF-02 reported submerged obstruction. This polygon is intentionally not a
+// tracked vessel. The VHF report supplies the operationally useful location.
+given_obstacle = pts={-200,200:200,200:200,600:-200,600},label=vhf02_submerged_obstruction

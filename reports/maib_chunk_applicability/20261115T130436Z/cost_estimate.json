@@ -1,0 +1,12 @@
+{
+  "requests": 10,
+  "estimated_input_tokens": 44635,
+  "maximum_output_tokens": 50000,
+  "pricing_mode": "standard_direct_api",
+  "model": "gpt-6.1-sol",
+  "input_rate_per_million": 2.0,
+  "output_rate_per_million": 10.0,
+  "estimated_input_cost_usd": 0.08927,
+  "maximum_output_cost_usd": 0.5,
+  "maximum_total_cost_usd": 0.58927
+}

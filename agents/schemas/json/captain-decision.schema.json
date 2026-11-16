@@ -1,0 +1,155 @@
+{
+  "$defs": {
+    "ClearVHFInstructionCommand": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "clear_vhf_instruction",
+          "title": "Type",
+          "type": "string"
+        },
+        "message_id": {
+          "format": "uuid",
+          "title": "Message Id",
+          "type": "string"
+        },
+        "reason": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "message_id",
+        "reason"
+      ],
+      "title": "ClearVHFInstructionCommand",
+      "type": "object"
+    },
+    "SendVHFCommand": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "send_vhf",
+          "title": "Type",
+          "type": "string"
+        },
+        "channel": {
+          "maximum": 88,
+          "minimum": 1,
+          "title": "Channel",
+          "type": "integer"
+        },
+        "message": {
+          "maxLength": 512,
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "channel",
+        "message"
+      ],
+      "title": "SendVHFCommand",
+      "type": "object"
+    },
+    "SoundHornCommand": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "sound_horn",
+          "title": "Type",
+          "type": "string"
+        },
+        "signal": {
+          "enum": [
+            "altering_course_to_starboard",
+            "altering_course_to_port",
+            "doubt_or_danger"
+          ],
+          "title": "Signal",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "signal"
+      ],
+      "title": "SoundHornCommand",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "High-level tactical decision selected by the captain.",
+  "properties": {
+    "action": {
+      "enum": [
+        "skip",
+        "maintain_course",
+        "rejoin_route",
+        "alter_course",
+        "set_speed",
+        "stop",
+        "resume"
+      ],
+      "title": "Action",
+      "type": "string"
+    },
+    "degrees": {
+      "maximum": 60.0,
+      "minimum": -60.0,
+      "title": "Degrees",
+      "type": "number"
+    },
+    "speed": {
+      "minimum": 0.0,
+      "title": "Speed",
+      "type": "number"
+    },
+    "reason": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "auxiliary_commands": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "clear_vhf_instruction": "#/$defs/ClearVHFInstructionCommand",
+            "send_vhf": "#/$defs/SendVHFCommand",
+            "sound_horn": "#/$defs/SoundHornCommand"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/SendVHFCommand"
+          },
+          {
+            "$ref": "#/$defs/SoundHornCommand"
+          },
+          {
+            "$ref": "#/$defs/ClearVHFInstructionCommand"
+          }
+        ]
+      },
+      "maxItems": 3,
+      "title": "Auxiliary Commands",
+      "type": "array"
+    }
+  },
+  "required": [
+    "action",
+    "degrees",
+    "speed",
+    "reason",
+    "auxiliary_commands"
+  ],
+  "title": "CaptainDecision",
+  "type": "object"
+}

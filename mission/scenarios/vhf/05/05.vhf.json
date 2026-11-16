@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "scenario_id": "VHF-05",
+  "title": "Target vessel reports loss of manoeuvrability",
+  "events": [
+    {
+      "event_id": "bravo_loss_of_steering",
+      "channel": 13,
+      "trigger": {
+        "contact": "BRAVO",
+        "range_lte_m": 1800
+      },
+      "transcript": "ALPHA, this is motor vessel BRAVO. WARNING. I have lost steering and am unable to alter course. My present course is zero nine zero degrees, speed twelve knots. Over.",
+      "expected_interpretation": {
+        "speaker": "BRAVO",
+        "addressee": "ALPHA",
+        "intent": "collision_warning",
+        "requested_action": "none"
+      },
+      "expected_response": "Acknowledge BRAVO's warning, verify its reported course and speed against the observed track, cease relying on BRAVO to manoeuvre, and take early independent avoiding action.",
+      "response_policy": "acknowledgement",
+      "response_terms": ["BRAVO", "lost steering", "keeping clear", "will keep clear", "roger"],
+      "forbidden_outcome": "Continuing to rely on BRAVO as the manoeuvring vessel after its fixed observed track corroborates the reported steering failure."
+    }
+  ]
+}

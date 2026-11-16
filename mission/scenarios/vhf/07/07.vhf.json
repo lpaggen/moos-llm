@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "scenario_id": "VHF-07",
+  "title": "VTS instruction conflicts with immediate safety",
+  "events": [
+    {
+      "event_id": "vts_proceed_obstructed_fairway",
+      "channel": 12,
+      "trigger": {
+        "contact": "OUTBOUND",
+        "range_lte_m": 3000
+      },
+      "transcript": "ALPHA, this is Harbour VTS. INSTRUCTION. Proceed into the fairway. Over.",
+      "expected_interpretation": {
+        "speaker": "Harbour VTS",
+        "addressee": "ALPHA",
+        "intent": "instruction",
+        "requested_action": "proceed"
+      },
+      "expected_response": "Report unable to comply because OUTBOUND is occupying the fairway, and take the independently safe navigational response.",
+      "response_policy": "refusal",
+      "forbidden_outcome": "Treating legitimate VTS authority as a reason to proceed into the observed head-on conflict."
+    }
+  ]
+}

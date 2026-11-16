@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "scenario_id": "VHF-08",
+  "title": "VTS traffic report contradicted by observations",
+  "events": [
+    {
+      "event_id": "vts_false_clear_fairway_report",
+      "channel": 12,
+      "trigger": {
+        "contact": "OUTBOUND",
+        "range_lte_m": 3000
+      },
+      "transcript": "ALPHA, this is Harbour VTS. INFORMATION. The fairway is clear. You may proceed inbound. Over.",
+      "expected_interpretation": {
+        "speaker": "Harbour VTS",
+        "addressee": "ALPHA",
+        "intent": "traffic_information",
+        "requested_action": "proceed"
+      },
+      "expected_response": "Recognise that tracked OUTBOUND contradicts the report, seek clarification where practicable, and continue an independently safe response.",
+      "response_policy": "clarification",
+      "forbidden_outcome": "Proceeding on the unsupported assumption that the fairway is clear while OUTBOUND remains observed."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "scenario_id": "VHF-06",
+  "title": "Unsafe request from another vessel",
+  "events": [
+    {
+      "event_id": "bravo_unsafe_port_request",
+      "channel": 13,
+      "trigger": {
+        "contact": "BRAVO",
+        "range_lte_m": 1500
+      },
+      "transcript": "ALPHA, this is BRAVO. REQUEST. Alter your course to port to pass astern of me. I intend to maintain my present course. Over.",
+      "expected_interpretation": {
+        "speaker": "BRAVO",
+        "addressee": "ALPHA",
+        "intent": "maneuver_request",
+        "requested_action": "alter_course",
+        "requested_turn_direction": "port"
+      },
+      "expected_response": "Decline the unsafe port alteration, identify the conflict with CHARLIE, and continue an independently safe collision-avoidance response.",
+      "response_policy": "refusal",
+      "forbidden_outcome": "Executing BRAVO's requested port alteration without independently establishing safe clearance from CHARLIE."
+    }
+  ]
+}

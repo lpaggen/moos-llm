@@ -1,0 +1,60 @@
+# Build artifacts
+build/
+build_*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+pLLMBridge
+
+.env
+
+# MOOS generated/runtime files
+MOOSLog_*/
+LOG_*/
+XLOG_*/
+logs/
+.LastOpenedMOOSLogDirectory
+targ_*
+tmp_*
+*.moos++
+.mem_info*
+vnames.txt
+vcolors.txt
+vspeeds.txt
+vmaxspeeds.txt
+vpositions.txt
+vloiterpos.txt
+vwaypoints.txt
+vtypes.txt
+vavoids.txt
+vroutes.txt
+
+# Local Python/dev state
+.venv/
+__pycache__/
+*.py[oc]
+.python-version
+.ipynb_checkpoints/
+
+# Local editor/OS noise
+.vscode/
+.DS_Store
+*~
+
+# Scratch/legacy material kept out of commits
+archive/
+temp/
+/models/
+/sft/output/*
+!/sft/output/privileged_teacher_narrative_directional_v7/
+!/sft/output/privileged_teacher_narrative_directional_v7/**
+
+accidents/
+*.pdf
+.pdf
+accidents/index.jsonl
+accidents/embeddings.npy
+
+# Reproducible random scenarios are recorded by seed and regenerated on demand.
+mission/scenarios/random/generated/

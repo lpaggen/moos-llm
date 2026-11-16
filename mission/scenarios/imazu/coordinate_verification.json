@@ -1,0 +1,26 @@
+{
+  "source": "https://link.springer.com/content/pdf/10.1007/s00773-020-00755-0.pdf",
+  "source_pdf_sha256": "99af21609bdd64c033610af2150870ddc1a455496dc72a1a31ac8150419af4eb",
+  "source_table": "Table 4, PDF page 14 / printed page 522",
+  "source_figure": "Figure 18, PDF page 15 / printed page 523",
+  "checked_cases": 22,
+  "checked_target_entries": 50,
+  "coordinate_mapping": "MOOS x=paper Y*1852; MOOS y=paper X*1852; heading unchanged modulo 360",
+  "source_csv_matches_paper": true,
+  "generated_ini_positions_and_headings_match_paper": true,
+  "max_coordinate_rounding_error_m": 1.8189894035458565e-12,
+  "own_ship_start_m": [
+    0,
+    -11112
+  ],
+  "own_ship_goal_m": [
+    0,
+    11112
+  ],
+  "corrections": [
+    "Case 12: remove extra head-on target; retain and renumber the two published targets",
+    "Case 16 TS1: paper X=Y=-2.970 NM, heading=45 degrees",
+    "Case 16 TS1 speed=8.4 kn inferred from the published 30-minute collision timing"
+  ],
+  "source_csv_sha256": "f9c55a0f16c30a1c3e77cc84e48a235ab6cff23b378cb51a6df64310b747caf5"
+}

@@ -1,0 +1,85 @@
+{
+  "case": "case_01",
+  "unit": "nm",
+  "layout": "panels",
+  "note": "Local simulation coordinates; straight segments connect logged observations. No smoothing, inferred coastlines, or unobserved route extension.",
+  "moment_note": "A and B mark arrow-tip snapshots within each run. Contact positions are as reported in that same bridge snapshot, without interpolation. Moments are selected independently per run, not synchronized across models.",
+  "runs": [
+    {
+      "label": "MOOS-IvP",
+      "log": "/home/lpagg/projects/moos-llm/logs/evaluations/imazu/moos_ivp_colregs_baseline/case_01/telemetry.jsonl",
+      "own_ship_samples": 93,
+      "outcome": "Mission complete",
+      "arrow_moments": [
+        {
+          "moment": "A",
+          "sample_index": 27,
+          "observed_at": 89531070507.2439,
+          "own_ship": [
+            0.0,
+            -1724.2263932367077
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              0.01,
+              1893.39
+            ]
+          }
+        },
+        {
+          "moment": "B",
+          "sample_index": 59,
+          "observed_at": 89531071307.82925,
+          "own_ship": [
+            589.6800154228021,
+            1568.130232536799
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              -0.02,
+              -2108.67
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Qwen3-8B + COLREG RAG",
+      "log": "/home/lpagg/projects/moos-llm/logs/evaluations/imazu/qwen3_8b_colregs_rag/case_01/audit.jsonl",
+      "own_ship_samples": 94,
+      "outcome": "Mission complete",
+      "arrow_moments": [
+        {
+          "moment": "A",
+          "sample_index": 27,
+          "observed_at": 8953432666.29517,
+          "own_ship": [
+            0.0,
+            -2086.039420097555
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              0.01,
+              1868.71
+            ]
+          }
+        },
+        {
+          "moment": "B",
+          "sample_index": 60,
+          "observed_at": 8953433560.838844,
+          "own_ship": [
+            683.6672251969461,
+            1913.7327655009387
+          ],
+          "contacts": {
+            "IMAZU_TS1": [
+              0.0,
+              -2605.06
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

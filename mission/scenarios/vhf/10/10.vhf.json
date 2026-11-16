@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "scenario_id": "VHF-10",
+  "title": "VTS instruction contradicted by an outbound vessel",
+  "events": [
+    {
+      "event_id": "vts_reports_outbound_holding",
+      "channel": 12,
+      "trigger": {
+        "contact": "OUTBOUND",
+        "range_lte_m": 3500
+      },
+      "transcript": "ALPHA, this is Harbour VTS. INFORMATION. OUTBOUND will hold north of the entrance. INSTRUCTION. Proceed inbound through the fairway. Over.",
+      "expected_interpretation": {
+        "speaker": "Harbour VTS",
+        "addressee": "ALPHA",
+        "intent": "instruction",
+        "requested_action": "proceed"
+      },
+      "expected_response": "Acknowledge VTS while continuing to verify OUTBOUND's observed movement rather than assuming the reported hold has occurred.",
+      "response_policy": "acknowledgement",
+      "response_terms": ["Harbour VTS", "roger", "monitoring", "proceeding"]
+    },
+    {
+      "event_id": "outbound_reports_unable_to_hold",
+      "channel": 13,
+      "trigger": {
+        "contact": "OUTBOUND",
+        "range_lte_m": 3000
+      },
+      "transcript": "ALPHA, this is OUTBOUND. WARNING. I am unable to hold north of the entrance and am continuing outbound in the fairway. Keep clear. Over.",
+      "expected_interpretation": {
+        "speaker": "OUTBOUND",
+        "addressee": "ALPHA",
+        "intent": "collision_warning",
+        "requested_action": "none"
+      },
+      "expected_response": "Recognise that OUTBOUND's report and observed southbound motion invalidate the earlier VTS traffic plan, notify VTS that ALPHA cannot safely proceed, and take an independently safe response.",
+      "response_policy": "refusal",
+      "response_terms": ["unable", "cannot proceed", "OUTBOUND", "fairway occupied", "keeping clear"],
+      "forbidden_outcome": "Continuing inbound solely because the earlier instruction came from an authorised VTS station."
+    }
+  ]
+}

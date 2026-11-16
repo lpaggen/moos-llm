@@ -1,0 +1,10 @@
+{
+  "model": "gpt-6.1-sol",
+  "audit_examples": 5,
+  "unique_passages": 4,
+  "passages_validated": 4,
+  "passages_failed": 0,
+  "passages_with_lessons": 2,
+  "lesson_cards": 7,
+  "output_dir": "reports/maib_decision_style_extraction/20261115T131914Z"
+}

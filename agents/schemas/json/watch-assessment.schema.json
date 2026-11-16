@@ -1,0 +1,112 @@
+{
+  "$defs": {
+    "DecisiveContact": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "reason": {
+          "maxLength": 80,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "reason"
+      ],
+      "title": "DecisiveContact",
+      "type": "object"
+    },
+    "LookoutTime": {
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "title": "Version",
+          "type": "integer"
+        },
+        "received_at": {
+          "title": "Received At",
+          "type": "number"
+        },
+        "moos_time": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Moos Time"
+        }
+      },
+      "required": [
+        "version",
+        "received_at"
+      ],
+      "title": "LookoutTime",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Operational traffic brief delivered to the captain.",
+  "properties": {
+    "time": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/LookoutTime"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "priority": {
+      "enum": [
+        "clear",
+        "caution",
+        "danger",
+        "emergency"
+      ],
+      "title": "Priority",
+      "type": "string"
+    },
+    "brief": {
+      "maxLength": 120,
+      "title": "Brief",
+      "type": "string"
+    },
+    "decisive_contacts": {
+      "items": {
+        "$ref": "#/$defs/DecisiveContact"
+      },
+      "maxItems": 3,
+      "title": "Decisive Contacts",
+      "type": "array"
+    },
+    "situation": {
+      "maxLength": 120,
+      "title": "Situation",
+      "type": "string"
+    },
+    "caveat": {
+      "maxLength": 80,
+      "title": "Caveat",
+      "type": "string"
+    }
+  },
+  "required": [
+    "priority",
+    "brief",
+    "decisive_contacts",
+    "situation",
+    "caveat"
+  ],
+  "title": "LookoutAssessment",
+  "type": "object"
+}

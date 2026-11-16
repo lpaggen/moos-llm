@@ -1,0 +1,19 @@
+{
+  "index": "accidents/index.jsonl",
+  "index_sha256": "3f04d0d7a2bf8ccca705ac0bf3cb66f9925f4f95d12fbf0c47247d1012575caa",
+  "embeddings": "accidents/embeddings.npy",
+  "embeddings_sha256": "aa09a89eeda61f306ac6f6d2342f50ad4496e21c99a27975a4ebc492602d94ec",
+  "cards_path": "accidents/cards_decision_style_curated/cards.retained.jsonl",
+  "cards_sha256": "2523ef4b019dce48bdf9b0826f6bc73dd289a8646770383aed0204b1a715a292",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "reranker_model": "cross-encoder/ms-marco-MiniLM-L6-v2",
+  "candidate_count": 20,
+  "query_mode": "generic",
+  "documents": 2373,
+  "card_records": 503,
+  "timings": {
+    "dense_query_encoding_seconds": 4.723679000991979,
+    "cross_encoder_seconds": 236.6335591990064,
+    "cross_encoder_pairs": 9082
+  }
+}

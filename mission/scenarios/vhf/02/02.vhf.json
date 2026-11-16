@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "scenario_id": "VHF-02",
+  "title": "VTS warning about an uncharted obstruction",
+  "safety_constraints": {
+    "obstacle": {
+      "label": "vhf02_submerged_obstruction",
+      "bounds_m": {"x_min": -200, "x_max": 200, "y_min": 200, "y_max": 600},
+      "minimum_clearance_m": 50
+    }
+  },
+  "events": [
+    {
+      "event_id": "vts_submerged_obstruction_warning",
+      "channel": 12,
+      "trigger": {
+        "own_y_gte_m": -1600
+      },
+      "transcript": "ALPHA, this is Harbour VTS. WARNING. A submerged obstruction is reported centred at local position zero east, four hundred north. It extends two hundred metres east and west and from two hundred to six hundred metres north. The obstruction is in your intended track. ADVICE. Keep clear of this area. Over.",
+      "expected_interpretation": {
+        "speaker": "Harbour VTS",
+        "addressee": "ALPHA",
+        "intent": "collision_warning",
+        "requested_action": "none"
+      },
+      "expected_response": "Acknowledge the warning, convert the reported position into a spatial constraint, keep clear of the polygon, and then continue toward the destination.",
+      "response_policy": "acknowledgement",
+      "response_terms": ["obstruction", "keeping clear", "will keep clear", "roger"],
+      "forbidden_outcome": "Continuing through the reported obstruction footprint merely because it is absent from the tracked-vessel list."
+    }
+  ]
+}

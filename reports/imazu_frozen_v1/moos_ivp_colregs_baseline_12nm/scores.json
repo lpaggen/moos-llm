@@ -1,0 +1,3007 @@
+{
+  "summary": {
+    "cases": 22,
+    "mean_composite_score": 0.6256462202016173,
+    "mean_completed_score": 0.7852635527772238,
+    "verdicts": {
+      "PASS": 16,
+      "FAIL -- did not reach the goal": 6
+    },
+    "mean_axes": {
+      "safety": 1.0,
+      "compliance": 0.47954545454545455,
+      "citation": 0.0,
+      "temporal": 0.5612206045882617,
+      "spatial": 0.573635658889724,
+      "manoeuvre": 0.9686033163480446,
+      "smoothness": 0.9881692492487077
+    },
+    "weights": {
+      "safety": 0.35,
+      "compliance": 0.1,
+      "citation": 0.1,
+      "temporal": 0.1,
+      "spatial": 0.1,
+      "manoeuvre": 0.1,
+      "smoothness": 0.15
+    },
+    "scoring_contract_version": "imazu-frozen-v1",
+    "safe_distance_m": 500.0,
+    "heading_deadband_deg": 1.0,
+    "speed_deadband_mps": 0.1,
+    "score_kind": "frozen retrospective physical audit plus Eriksen citation-set agreement",
+    "policies": [
+      "Prefer audited captain_validated decisions; infer heading/speed actions only when absent",
+      "No explanation deductions; explanations do not enter composite",
+      "One inferred action per observed interval; heading changes take priority over speed changes",
+      "Geometry risk horizon=max(60s,2*safe_distance/relative_speed); source helper unavailable",
+      "COLREG head-on bearing 15deg, reciprocal heading tolerance 30deg; overtaking abaft 112.5deg",
+      "Passing-side classification uses scenario initial geometry and realized closest approach",
+      "Contact positions use native timestamps; no extrapolation outside recorded spans",
+      "Clearance=min(latched logged range, one-second interpolated contact-overlap ranges)",
+      "Arrival uses interpolated 20m goal crossing, falling back to logged mission completion",
+      "Citation axis is macro per-cycle F1 against Eriksen applicable_rules union persistent Rules 2, 5, 6, and 7 on every cycle",
+      "Citation source is captain_decision in Captain-critic runs and oow_decision otherwise; absent oracle coverage scores zero",
+      "Initial unrecorded travel omitted, matching recorded-run elapsed time and path convention",
+      "All 22 cases equally weighted, including capped non-arrivals"
+    ]
+  },
+  "cases": [
+    {
+      "case": 1,
+      "composite_score": 0.8816495749068111,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.85,
+        "citation": 0.0,
+        "temporal": 1.0,
+        "spatial": 1.0,
+        "manoeuvre": 0.9753086419753086,
+        "smoothness": 0.9941247380618679
+      },
+      "min_cpa_m": 924.7328667319714,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 1,
+        "manoeuvre_rate": 0.007407407407407408,
+        "manoeuvre_score": 0.9753086419753086
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 55,
+          "deduction": -0.15
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 394.8234886716025,
+            "tcpa": 132.15976778179748,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 329.9678466000616,
+            "risk_horizon_s": 87.14745379466088,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 55
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 124,
+        "turn_right": 3,
+        "turn_left": 8,
+        "slow_down": 1
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_01/telemetry.jsonl"
+    },
+    {
+      "case": 2,
+      "composite_score": 0.7826673459008489,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.7,
+        "citation": 0.0,
+        "temporal": 0.5720072081299988,
+        "spatial": 0.5739649736017418,
+        "manoeuvre": 0.9867197875166003,
+        "smoothness": 0.9959876598400987
+      },
+      "min_cpa_m": 1480.6362473246672,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 1,
+        "manoeuvre_rate": 0.00398406374501992,
+        "manoeuvre_score": 0.9867197875166003
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 52,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 53,
+          "deduction": -0.15
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 137.95141864904892,
+            "tcpa": 203.28062031962259,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 49.44712478555453,
+            "risk_horizon_s": 114.60401639976457,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 52
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 407.7232551907021,
+            "tcpa": 374.5225129436558,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 98.67992692698255,
+            "risk_horizon_s": 243.10436647232544,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 53
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 228,
+        "turn_left": 4,
+        "turn_right": 19,
+        "slow_down": 1
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_02/telemetry.jsonl"
+    },
+    {
+      "case": 3,
+      "composite_score": 0.2,
+      "verdict": "FAIL -- did not reach the goal",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 1.0,
+        "citation": 0.0,
+        "temporal": 0.0,
+        "spatial": 0.0,
+        "manoeuvre": 0.9943502824858758,
+        "smoothness": 0.9774810452729992
+      },
+      "min_cpa_m": 1348.0711881500495,
+      "arrival_source": "not_arrived",
+      "manoeuvre_details": {
+        "manoeuvre_count": 2,
+        "manoeuvre_rate": 0.001694915254237288,
+        "manoeuvre_score": 0.9943502824858758
+      },
+      "compliance_breakdown": [],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [],
+      "inferred_action_counts": {
+        "hold_course": 159,
+        "slow_down": 5,
+        "turn_left": 3,
+        "turn_right": 1012,
+        "speed_up": 2
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_03/telemetry.jsonl"
+    },
+    {
+      "case": 4,
+      "composite_score": 0.7419122479612562,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.0,
+        "citation": 0.0,
+        "temporal": 0.7183665122748096,
+        "spatial": 0.7231484989876126,
+        "manoeuvre": 0.9833333333333333,
+        "smoothness": 0.996182756677872
+      },
+      "min_cpa_m": 1007.6514434610474,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 1,
+        "manoeuvre_rate": 0.005,
+        "manoeuvre_score": 0.9833333333333333
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 47,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 48,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 49,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 50,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 51,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 52,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 54,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 55,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 56,
+          "deduction": -0.15
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 163.3726148485854,
+            "tcpa": 326.6551284228619,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 286.45436910492504,
+            "risk_horizon_s": 211.7606101906607,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 47
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 161.32769973701318,
+            "tcpa": 349.66619727606195,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 280.34163466476684,
+            "risk_horizon_s": 244.62158001765002,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 48
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 145.05619595509492,
+            "tcpa": 369.13143985391775,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 275.54010713362004,
+            "risk_horizon_s": 275.4019534725647,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 49
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 91.30615074787593,
+            "tcpa": 409.20470080803034,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 270.00083787203346,
+            "risk_horizon_s": 322.2349817289363,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 50
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 42.47562011433264,
+            "tcpa": 554.3468896843735,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 260.092236684603,
+            "risk_horizon_s": 458.99712016779324,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 51
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 58.59062023698407,
+            "tcpa": 567.9817960625995,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 258.19108619427044,
+            "risk_horizon_s": 491.0139783969295,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 52
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 15.630612698652005,
+            "tcpa": 676.4546905158705,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 254.5986073620319,
+            "risk_horizon_s": 632.7627601119761,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 54
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 89.3364912189262,
+            "tcpa": 1021.8479713203297,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 248.9696959288388,
+            "risk_horizon_s": 983.5994716774082,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 55
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 144.65435225756272,
+            "tcpa": 2648.364793080362,
+            "band": "early",
+            "kind": "overtaking",
+            "role": "stand_on",
+            "relative_bearing": 243.52665252844753,
+            "risk_horizon_s": 2629.3135697236216,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 56
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 177,
+        "turn_right": 9,
+        "turn_left": 14,
+        "slow_down": 1
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_04/telemetry.jsonl"
+    },
+    {
+      "case": 5,
+      "composite_score": 0.7540642331931573,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.4,
+        "citation": 0.0,
+        "temporal": 0.5757200544936191,
+        "spatial": 0.5777116209575851,
+        "manoeuvre": 0.9933333333333333,
+        "smoothness": 0.9959182154313562
+      },
+      "min_cpa_m": 1379.6469639067818,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 1,
+        "manoeuvre_rate": 0.002,
+        "manoeuvre_score": 0.9933333333333333
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 50,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 51,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "label": "P wrong side pass",
+          "at": "run",
+          "deduction": -0.3
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 0.010000000000152144,
+            "tcpa": 201.35432273664145,
+            "band": "early",
+            "kind": "head_on",
+            "role": "give_way",
+            "relative_bearing": 0.00023059321005145783,
+            "risk_horizon_s": 81.03727714748784,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 50
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 23.252326236296774,
+            "tcpa": 177.73118308352218,
+            "band": "early",
+            "kind": "head_on",
+            "role": "give_way",
+            "relative_bearing": 1.226794658507174,
+            "risk_horizon_s": 81.50424750949527,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 51
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "contacts": [
+            {
+              "contact": "IMAZU_TS2",
+              "encounter": "crossing",
+              "time_s": 3688.737594604492,
+              "range_m": 1485.7238299218811,
+              "relative_bearing": 90.40471623244773
+            },
+            {
+              "contact": "IMAZU_TS1",
+              "encounter": "head_on",
+              "time_s": 1426.1326904296875,
+              "range_m": 1379.6469639067818,
+              "relative_bearing": 135.2906351099821
+            }
+          ]
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 229,
+        "turn_left": 4,
+        "turn_right": 17,
+        "slow_down": 1
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_05/telemetry.jsonl"
+    },
+    {
+      "case": 6,
+      "composite_score": 0.7470003910748002,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.10000000000000009,
+        "citation": 0.0,
+        "temporal": 0.7061449981757645,
+        "spatial": 0.7147498169516957,
+        "manoeuvre": 0.9589490968801313,
+        "smoothness": 0.9934399991602738
+      },
+      "min_cpa_m": 1204.4119759812572,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 5,
+        "manoeuvre_rate": 0.012315270935960592,
+        "manoeuvre_score": 0.9589490968801313
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 17,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 60,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 61,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 62,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "label": "P wrong side pass",
+          "at": "run",
+          "deduction": -0.3
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 14.31812962455063,
+            "tcpa": 3433.9891558954087,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 87.44590302897308,
+            "risk_horizon_s": 2322.9954243483835,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 17
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 59.9406514895636,
+            "tcpa": 12423.472240194378,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 86.93460807356394,
+            "risk_horizon_s": 9286.305792432364,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 60
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 459.35736383110344,
+            "tcpa": 435.37461746720373,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 106.99344970824524,
+            "risk_horizon_s": 374.6977293112976,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 61
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 405.91925519147867,
+            "tcpa": 2059.855307128425,
+            "band": "early",
+            "kind": "overtaking",
+            "role": "stand_on",
+            "relative_bearing": 128.07389090571314,
+            "risk_horizon_s": 1796.2722171642718,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 62
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "contacts": [
+            {
+              "contact": "IMAZU_TS2",
+              "encounter": "crossing",
+              "time_s": 3200.717056274414,
+              "range_m": 1204.4119759812572,
+              "relative_bearing": 132.89029891224902
+            }
+          ]
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 162,
+        "speed_up": 3,
+        "slow_down": 2,
+        "turn_left": 20,
+        "turn_right": 17
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_06/telemetry.jsonl"
+    },
+    {
+      "case": 7,
+      "composite_score": 0.2,
+      "verdict": "FAIL -- did not reach the goal",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 1.0,
+        "citation": 0.0,
+        "temporal": 0.0,
+        "spatial": 0.0,
+        "manoeuvre": 0.9915110356536503,
+        "smoothness": 0.9774553697295967
+      },
+      "min_cpa_m": 1347.3017129282725,
+      "arrival_source": "not_arrived",
+      "manoeuvre_details": {
+        "manoeuvre_count": 6,
+        "manoeuvre_rate": 0.0025466893039049238,
+        "manoeuvre_score": 0.9915110356536503
+      },
+      "compliance_breakdown": [],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [],
+      "inferred_action_counts": {
+        "hold_course": 159,
+        "slow_down": 5,
+        "speed_up": 4,
+        "turn_left": 3,
+        "turn_right": 1008
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_07/telemetry.jsonl"
+    },
+    {
+      "case": 8,
+      "composite_score": 0.7540995085785076,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.4,
+        "citation": 0.0,
+        "temporal": 0.5757950093350123,
+        "spatial": 0.5778571131208052,
+        "manoeuvre": 0.9933065595716198,
+        "smoothness": 0.9960242691717598
+      },
+      "min_cpa_m": 1379.2822501511396,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 1,
+        "manoeuvre_rate": 0.002008032128514056,
+        "manoeuvre_score": 0.9933065595716198
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 50,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 51,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "label": "P wrong side pass",
+          "at": "run",
+          "deduction": -0.3
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 0.010000000000152868,
+            "tcpa": 202.3108181814576,
+            "band": "early",
+            "kind": "head_on",
+            "role": "give_way",
+            "relative_bearing": 0.00022950299966626944,
+            "risk_horizon_s": 81.03727714748784,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 50
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 46.37975972209643,
+            "tcpa": 179.62000173065562,
+            "band": "early",
+            "kind": "head_on",
+            "role": "give_way",
+            "relative_bearing": 2.4538016045506197,
+            "risk_horizon_s": 82.12051021606348,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 51
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "contacts": [
+            {
+              "contact": "IMAZU_TS2",
+              "encounter": "crossing",
+              "time_s": 3687.964859008789,
+              "range_m": 1487.4663687589052,
+              "relative_bearing": 90.39679960843154
+            },
+            {
+              "contact": "IMAZU_TS1",
+              "encounter": "head_on",
+              "time_s": 1425.8304595947266,
+              "range_m": 1379.2822501511396,
+              "relative_bearing": 134.88515838214224
+            }
+          ]
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 229,
+        "turn_left": 4,
+        "turn_right": 17
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_08/telemetry.jsonl"
+    },
+    {
+      "case": 9,
+      "composite_score": 0.8093742205301677,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.4,
+        "citation": 0.0,
+        "temporal": 0.8589070121488955,
+        "spatial": 0.8829366377315372,
+        "manoeuvre": 0.9600798403193612,
+        "smoothness": 0.994545810067922
+      },
+      "min_cpa_m": 929.0559726224685,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 4,
+        "manoeuvre_rate": 0.011976047904191617,
+        "manoeuvre_score": 0.9600798403193612
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 37,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 38,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "label": "P wrong side pass",
+          "at": "run",
+          "deduction": -0.3
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 16.432655919800965,
+            "tcpa": 576.4989521520364,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 48.63713904742548,
+            "risk_horizon_s": 121.28016785527593,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 37
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 303.55418863653176,
+            "tcpa": 652.2213459740185,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 62.70955136938187,
+            "risk_horizon_s": 143.47868033373476,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 38
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "contacts": [
+            {
+              "contact": "IMAZU_TS2",
+              "encounter": "crossing",
+              "time_s": 1663.2096557617188,
+              "range_m": 929.0559726224685,
+              "relative_bearing": 156.41091633130742
+            }
+          ]
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 154,
+        "slow_down": 3,
+        "turn_left": 8,
+        "speed_up": 1,
+        "turn_right": 2
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_09/telemetry.jsonl"
+    },
+    {
+      "case": 10,
+      "composite_score": 0.8646841947066646,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 1.0,
+        "citation": 0.0,
+        "temporal": 0.8417397859752319,
+        "spatial": 0.8498957705684724,
+        "manoeuvre": 0.9707602339181287,
+        "smoothness": 0.9896307710698753
+      },
+      "min_cpa_m": 1003.4898020194086,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 3,
+        "manoeuvre_rate": 0.008771929824561403,
+        "manoeuvre_score": 0.9707602339181287
+      },
+      "compliance_breakdown": [],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [],
+      "inferred_action_counts": {
+        "hold_course": 132,
+        "turn_right": 10,
+        "slow_down": 2,
+        "turn_left": 28
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_10/telemetry.jsonl"
+    },
+    {
+      "case": 11,
+      "composite_score": 0.7666334188651464,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.0,
+        "citation": 0.0,
+        "temporal": 0.862484572832994,
+        "spatial": 0.8925415207100343,
+        "manoeuvre": 0.9196787148594378,
+        "smoothness": 0.9944195868326653
+      },
+      "min_cpa_m": 861.0669667032226,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 8,
+        "manoeuvre_rate": 0.024096385542168676,
+        "manoeuvre_score": 0.9196787148594378
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 37,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 37,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_port_toward_contact",
+          "label": "P port toward contact",
+          "at": 37,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 38,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 38,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_port_toward_contact",
+          "label": "P port toward contact",
+          "at": 38,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 39,
+          "deduction": -0.15
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 157.6418350428059,
+            "tcpa": 571.0186972852806,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 86.62234971448888,
+            "risk_horizon_s": 324.00072576236374,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 37
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 242.6150003938673,
+            "tcpa": 567.3560644138935,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 313.4156975280467,
+            "risk_horizon_s": 123.43666110970234,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 37
+        },
+        {
+          "code": "P_port_toward_contact",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 242.6150003938673,
+            "tcpa": 567.3560644138935,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 313.4156975280467,
+            "risk_horizon_s": 123.43666110970234,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 37
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 165.2616441187808,
+            "tcpa": 667.0317730400383,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 92.28375902202151,
+            "risk_horizon_s": 394.81342014984637,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 38
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 427.34163387871746,
+            "tcpa": 513.3809079929621,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 319.61713468177356,
+            "risk_horizon_s": 117.13490901949915,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 38
+        },
+        {
+          "code": "P_port_toward_contact",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 427.34163387871746,
+            "tcpa": 513.3809079929621,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 319.61713468177356,
+            "risk_horizon_s": 117.13490901949915,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 38
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 447.91439993970044,
+            "tcpa": 1082.4062883524812,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 104.45296666270755,
+            "risk_horizon_s": 681.3941653954583,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 39
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 145,
+        "slow_down": 6,
+        "turn_left": 10,
+        "speed_up": 4,
+        "turn_right": 2
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_11/telemetry.jsonl"
+    },
+    {
+      "case": 12,
+      "composite_score": 0.8446864172574197,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.85,
+        "citation": 0.0,
+        "temporal": 0.8323413100784175,
+        "spatial": 0.8721018207939677,
+        "manoeuvre": 0.9031007751937985,
+        "smoothness": 0.9928801776720088
+      },
+      "min_cpa_m": 1027.362599429425,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 10,
+        "manoeuvre_rate": 0.029069767441860465,
+        "manoeuvre_score": 0.9031007751937985
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 56,
+          "deduction": -0.15
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 113.60144823161879,
+            "tcpa": 461.7164268808556,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 77.9928824847405,
+            "risk_horizon_s": 278.8108334809224,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 56
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 146,
+        "turn_right": 7,
+        "turn_left": 13,
+        "slow_down": 4,
+        "speed_up": 3
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_12/telemetry.jsonl"
+    },
+    {
+      "case": 13,
+      "composite_score": 0.7366741121889377,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.0,
+        "citation": 0.0,
+        "temporal": 0.7022626449606058,
+        "spatial": 0.7117796156057377,
+        "manoeuvre": 0.9673202614379085,
+        "smoothness": 0.9902523999234174
+      },
+      "min_cpa_m": 978.4668685674196,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 6,
+        "manoeuvre_rate": 0.00980392156862745,
+        "manoeuvre_score": 0.9673202614379085
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 21,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 22,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 53,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 97,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_port_toward_contact",
+          "label": "P port toward contact",
+          "at": 97,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 98,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 99,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 128,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 129,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 145,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_port_toward_contact",
+          "label": "P port toward contact",
+          "at": 145,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 146,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_port_toward_contact",
+          "label": "P port toward contact",
+          "at": 146,
+          "deduction": -0.15
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 193.68673960374215,
+            "tcpa": 1155.3222270731874,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 252.04213568847723,
+            "risk_horizon_s": 1142.0533666314943,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 21
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 53.35198071005562,
+            "tcpa": 1591.7653242380836,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 249.5128326152415,
+            "risk_horizon_s": 1576.9923823967363,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 22
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 351.03528262343787,
+            "tcpa": 1496.6131818464053,
+            "band": "early",
+            "kind": "overtaking",
+            "role": "stand_on",
+            "relative_bearing": 225.5255200553333,
+            "risk_horizon_s": 1023.4774740716302,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 53
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 498.79906986894383,
+            "tcpa": 666.0219505494616,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 250.7141544387944,
+            "risk_horizon_s": 447.0322695834751,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 97
+        },
+        {
+          "code": "P_port_toward_contact",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 498.79906986894383,
+            "tcpa": 666.0219505494616,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 250.7141544387944,
+            "risk_horizon_s": 447.0322695834751,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 97
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 103.88467427347663,
+            "tcpa": 527.9568284503583,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 255.30663658375383,
+            "risk_horizon_s": 358.2048827813358,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 98
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 312.90620000835236,
+            "tcpa": 2722.884819979159,
+            "band": "early",
+            "kind": "overtaking",
+            "role": "stand_on",
+            "relative_bearing": 233.18950917971762,
+            "risk_horizon_s": 1937.6189521529113,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 99
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 60.73216659520721,
+            "tcpa": 481.80799585296353,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 258.3393178304898,
+            "risk_horizon_s": 339.4161032993418,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 128
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 311.4981140495134,
+            "tcpa": 2277.001033619304,
+            "band": "early",
+            "kind": "overtaking",
+            "role": "stand_on",
+            "relative_bearing": 235.46959463384914,
+            "risk_horizon_s": 1697.0622793403213,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 129
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 105.38804367781269,
+            "tcpa": 1142.991435018761,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 350.90458512446634,
+            "risk_horizon_s": 168.53740119337002,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 145
+        },
+        {
+          "code": "P_port_toward_contact",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 105.38804367781269,
+            "tcpa": 1142.991435018761,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 350.90458512446634,
+            "risk_horizon_s": 168.53740119337002,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 145
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 460.73374292719,
+            "tcpa": 1096.5463597889218,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 357.17427582254516,
+            "risk_horizon_s": 165.50446755439506,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 146
+        },
+        {
+          "code": "P_port_toward_contact",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 460.73374292719,
+            "tcpa": 1096.5463597889218,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 357.17427582254516,
+            "risk_horizon_s": 165.50446755439506,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 146
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 151,
+        "turn_right": 28,
+        "turn_left": 26
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_13/telemetry.jsonl"
+    },
+    {
+      "case": 14,
+      "composite_score": 0.7501141226850199,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.10000000000000009,
+        "citation": 0.0,
+        "temporal": 0.7096912636270251,
+        "spatial": 0.7176561458372614,
+        "manoeuvre": 0.9834983498349835,
+        "smoothness": 0.9935303117006193
+      },
+      "min_cpa_m": 1277.893244005797,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 3,
+        "manoeuvre_rate": 0.0049504950495049506,
+        "manoeuvre_score": 0.9834983498349835
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 14,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 18,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 58,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 59,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "label": "P wrong side pass",
+          "at": "run",
+          "deduction": -0.3
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 78.00264208485746,
+            "tcpa": 1398.372965333531,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 76.2241928940847,
+            "risk_horizon_s": 255.8060090890765,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 14
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 324.27361692085555,
+            "tcpa": 1314.7922064621223,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 76.07707835932445,
+            "risk_horizon_s": 259.02135378909946,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 18
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 55.920099467230955,
+            "tcpa": 12508.83488733531,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 87.12279073818684,
+            "risk_horizon_s": 9286.306555039373,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 58
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 168.0588242689586,
+            "tcpa": 1965.3759213676285,
+            "band": "early",
+            "kind": "overtaking",
+            "role": "stand_on",
+            "relative_bearing": 126.46631512533668,
+            "risk_horizon_s": 1542.371568994677,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 59
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "contacts": [
+            {
+              "contact": "IMAZU_TS2",
+              "encounter": "crossing",
+              "time_s": 1550.5274963378906,
+              "range_m": 1277.893244005797,
+              "relative_bearing": 131.65183105684702
+            },
+            {
+              "contact": "IMAZU_TS3",
+              "encounter": "crossing",
+              "time_s": 1552.69580078125,
+              "range_m": 1320.2650578690275,
+              "relative_bearing": 157.17500582880461
+            }
+          ]
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 163,
+        "speed_up": 1,
+        "slow_down": 2,
+        "turn_left": 20,
+        "turn_right": 17
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_14/telemetry.jsonl"
+    },
+    {
+      "case": 15,
+      "composite_score": 0.2,
+      "verdict": "FAIL -- did not reach the goal",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 1.0,
+        "citation": 0.0,
+        "temporal": 0.0,
+        "spatial": 0.0,
+        "manoeuvre": 0.9896069538926682,
+        "smoothness": 0.9769861611780652
+      },
+      "min_cpa_m": 1332.4247877175196,
+      "arrival_source": "not_arrived",
+      "manoeuvre_details": {
+        "manoeuvre_count": 11,
+        "manoeuvre_rate": 0.0031179138321995466,
+        "manoeuvre_score": 0.9896069538926682
+      },
+      "compliance_breakdown": [],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [],
+      "inferred_action_counts": {
+        "hold_course": 140,
+        "slow_down": 9,
+        "speed_up": 6,
+        "turn_right": 1011,
+        "turn_left": 11
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_15/telemetry.jsonl"
+    },
+    {
+      "case": 16,
+      "composite_score": 0.7144263681600594,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.0,
+        "citation": 0.0,
+        "temporal": 0.5858344540162396,
+        "spatial": 0.5946215319215253,
+        "manoeuvre": 0.9727891156462585,
+        "smoothness": 0.9940123866777142
+      },
+      "min_cpa_m": 800.4119319893085,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 6,
+        "manoeuvre_rate": 0.00816326530612245,
+        "manoeuvre_score": 0.9727891156462585
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 52,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 54,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 55,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_port_toward_contact",
+          "label": "P port toward contact",
+          "at": 55,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 56,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 137,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_port_toward_contact",
+          "label": "P port toward contact",
+          "at": 137,
+          "deduction": -0.15
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 38.35070396855833,
+            "tcpa": 329.46025683155716,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 266.3372664395856,
+            "risk_horizon_s": 197.40322337789314,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 52
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 234.36579185293385,
+            "tcpa": 842.4304352244674,
+            "band": "early",
+            "kind": "overtaking",
+            "role": "stand_on",
+            "relative_bearing": 222.39321378030354,
+            "risk_horizon_s": 559.2041473731409,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 54
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 342.5551905808689,
+            "tcpa": 409.5368633539459,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 246.38605629864708,
+            "risk_horizon_s": 289.6960188309891,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 55
+        },
+        {
+          "code": "P_port_toward_contact",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 342.5551905808689,
+            "tcpa": 409.5368633539459,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 246.38605629864708,
+            "risk_horizon_s": 289.6960188309891,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 55
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 462.6419259990409,
+            "tcpa": 310.8369194413497,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 253.7531089709794,
+            "risk_horizon_s": 240.72376914974566,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 56
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 487.2999893960075,
+            "tcpa": 1945.626450798992,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 317.24313173315915,
+            "risk_horizon_s": 218.55129474980924,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 137
+        },
+        {
+          "code": "P_port_toward_contact",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 487.2999893960075,
+            "tcpa": 1945.626450798992,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 317.24313173315915,
+            "risk_horizon_s": 218.55129474980924,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 137
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 214,
+        "turn_right": 11,
+        "speed_up": 1,
+        "turn_left": 19,
+        "slow_down": 1
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_16/telemetry.jsonl"
+    },
+    {
+      "case": 17,
+      "composite_score": 0.2,
+      "verdict": "FAIL -- did not reach the goal",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 1.0,
+        "citation": 0.0,
+        "temporal": 0.0,
+        "spatial": 0.0,
+        "manoeuvre": 0.9688208616780045,
+        "smoothness": 0.9586645656199613
+      },
+      "min_cpa_m": 983.8866057942012,
+      "arrival_source": "not_arrived",
+      "manoeuvre_details": {
+        "manoeuvre_count": 33,
+        "manoeuvre_rate": 0.00935374149659864,
+        "manoeuvre_score": 0.9688208616780045
+      },
+      "compliance_breakdown": [],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [],
+      "inferred_action_counts": {
+        "hold_course": 152,
+        "turn_right": 514,
+        "turn_left": 504,
+        "speed_up": 6,
+        "slow_down": 1
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_17/telemetry.jsonl"
+    },
+    {
+      "case": 18,
+      "composite_score": 0.773373140702987,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.0,
+        "citation": 0.0,
+        "temporal": 0.8793354819184324,
+        "spatial": 0.9310194287859522,
+        "manoeuvre": 0.9318336741649625,
+        "smoothness": 0.9943618814403488
+      },
+      "min_cpa_m": 851.6228026688734,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 10,
+        "manoeuvre_rate": 0.02044989775051125,
+        "manoeuvre_score": 0.9318336741649625
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 16,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 17,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 19,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 61,
+          "deduction": -0.15
+        },
+        {
+          "code": "D_no_action_when_required",
+          "label": "D no action when required",
+          "at": 97,
+          "deduction": -0.15
+        },
+        {
+          "code": "D_no_action_when_required",
+          "label": "D no action when required",
+          "at": 98,
+          "deduction": -0.15
+        },
+        {
+          "code": "D_no_action_when_required",
+          "label": "D no action when required",
+          "at": 99,
+          "deduction": -0.15
+        },
+        {
+          "code": "D_no_action_when_required",
+          "label": "D no action when required",
+          "at": 100,
+          "deduction": -0.15
+        },
+        {
+          "code": "D_no_action_when_required",
+          "label": "D no action when required",
+          "at": 101,
+          "deduction": -0.15
+        },
+        {
+          "code": "D_no_action_when_required",
+          "label": "D no action when required",
+          "at": 102,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "label": "P wrong side pass",
+          "at": "run",
+          "deduction": -0.3
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 162.98996967569633,
+            "tcpa": 1117.356928719155,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 84.26449312095508,
+            "risk_horizon_s": 333.76148972577676,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 16
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 282.3905533988172,
+            "tcpa": 1383.0471366211384,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 90.7153917436105,
+            "risk_horizon_s": 422.55252121294285,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 17
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 197.79044402858364,
+            "tcpa": 1486.105928549188,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 93.01093916962805,
+            "risk_horizon_s": 468.6847828090344,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 19
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 273.5298297050725,
+            "tcpa": 666.9049847001372,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 88.09187007626713,
+            "risk_horizon_s": 544.7330814391174,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 61
+        },
+        {
+          "code": "D_no_action_when_required",
+          "inferred_action": "hold_course",
+          "ground_truth": {
+            "cpa": 21.870092304121023,
+            "tcpa": 4629.025632895754,
+            "band": "acute",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 87.743265523957,
+            "risk_horizon_s": 4643.329691484235,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 97
+        },
+        {
+          "code": "D_no_action_when_required",
+          "inferred_action": "hold_course",
+          "ground_truth": {
+            "cpa": 21.48600525848769,
+            "tcpa": 4603.814697230863,
+            "band": "acute",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 87.7585705943834,
+            "risk_horizon_s": 4643.3297049915445,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 98
+        },
+        {
+          "code": "D_no_action_when_required",
+          "inferred_action": "hold_course",
+          "ground_truth": {
+            "cpa": 26.088160631735796,
+            "tcpa": 4578.405223924458,
+            "band": "acute",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 87.4844157743562,
+            "risk_horizon_s": 4643.329697019685,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 99
+        },
+        {
+          "code": "D_no_action_when_required",
+          "inferred_action": "hold_course",
+          "ground_truth": {
+            "cpa": 19.46237143875628,
+            "tcpa": 4553.735789087851,
+            "band": "acute",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 87.86309787466882,
+            "risk_horizon_s": 4643.329701779698,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 100
+        },
+        {
+          "code": "D_no_action_when_required",
+          "inferred_action": "hold_course",
+          "ground_truth": {
+            "cpa": 17.348106651006596,
+            "tcpa": 4529.691726283414,
+            "band": "acute",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 87.98119793633094,
+            "risk_horizon_s": 4643.329698853368,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 101
+        },
+        {
+          "code": "D_no_action_when_required",
+          "inferred_action": "hold_course",
+          "ground_truth": {
+            "cpa": 18.515882589901516,
+            "tcpa": 4504.597903438502,
+            "band": "acute",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 87.90657798057885,
+            "risk_horizon_s": 4643.329700720842,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 102
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "contacts": [
+            {
+              "contact": "IMAZU_TS1",
+              "encounter": "crossing",
+              "time_s": 1488.6072998046875,
+              "range_m": 971.7193764370977,
+              "relative_bearing": 119.81380555206556
+            }
+          ]
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 136,
+        "slow_down": 6,
+        "turn_left": 13,
+        "speed_up": 3,
+        "turn_right": 6
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_18/telemetry.jsonl"
+    },
+    {
+      "case": 19,
+      "composite_score": 0.848952373147793,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.55,
+        "citation": 0.0,
+        "temporal": 1.0,
+        "spatial": 1.0,
+        "manoeuvre": 0.9527186761229315,
+        "smoothness": 0.9912033702366666
+      },
+      "min_cpa_m": 923.4903459982321,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 6,
+        "manoeuvre_rate": 0.014184397163120567,
+        "manoeuvre_score": 0.9527186761229315
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 47,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "label": "P wrong side pass",
+          "at": "run",
+          "deduction": -0.3
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 320.60275105760195,
+            "tcpa": 407.6824616520444,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 21.49428873134019,
+            "risk_horizon_s": 100.19443522952339,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 47
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "contacts": [
+            {
+              "contact": "IMAZU_TS3",
+              "encounter": "crossing",
+              "time_s": 1485.3267364501953,
+              "range_m": 1254.036882679451,
+              "relative_bearing": 242.04722096716313
+            }
+          ]
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 109,
+        "slow_down": 6,
+        "turn_left": 12,
+        "turn_right": 11,
+        "speed_up": 4
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_19/telemetry.jsonl"
+    },
+    {
+      "case": 20,
+      "composite_score": 0.2,
+      "verdict": "FAIL -- did not reach the goal",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.10000000000000009,
+        "citation": 0.0,
+        "temporal": 0.0,
+        "spatial": 0.0,
+        "manoeuvre": 0.990551776266062,
+        "smoothness": 0.9759562568364399
+      },
+      "min_cpa_m": 1258.9188365324965,
+      "arrival_source": "not_arrived",
+      "manoeuvre_details": {
+        "manoeuvre_count": 10,
+        "manoeuvre_rate": 0.002834467120181406,
+        "manoeuvre_score": 0.990551776266062
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 16,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 39,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 121,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_wrong_direction",
+          "label": "B wrong direction",
+          "at": 123,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "label": "P wrong side pass",
+          "at": "run",
+          "deduction": -0.3
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 423.33659346015355,
+            "tcpa": 1061.3506618605861,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 94.76867813393079,
+            "risk_horizon_s": 652.2430135470273,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 16
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 196.91365617507273,
+            "tcpa": 730.6148219377761,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 58.74934912429245,
+            "risk_horizon_s": 144.8998243097757,
+            "contact": "IMAZU_TS3",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 39
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 94.14524722505041,
+            "tcpa": 990.9028033281047,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 66.23966245204929,
+            "risk_horizon_s": 611.8144259492514,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 121
+        },
+        {
+          "code": "B_wrong_direction",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 493.70919734648226,
+            "tcpa": 3896.0503813509117,
+            "band": "early",
+            "kind": "crossing",
+            "role": "give_way",
+            "relative_bearing": 81.24928098639997,
+            "risk_horizon_s": 2587.493182034808,
+            "contact": "IMAZU_TS1",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 123
+        },
+        {
+          "code": "P_wrong_side_pass",
+          "contacts": [
+            {
+              "contact": "IMAZU_TS3",
+              "encounter": "crossing",
+              "time_s": 1942.9400024414062,
+              "range_m": 1258.9188365324965,
+              "relative_bearing": 132.47510920876684
+            }
+          ]
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 119,
+        "slow_down": 6,
+        "turn_left": 1032,
+        "speed_up": 1,
+        "turn_right": 19
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_20/telemetry.jsonl"
+    },
+    {
+      "case": 21,
+      "composite_score": 0.7939051745760042,
+      "verdict": "PASS",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 0.09999999999999998,
+        "citation": 0.0,
+        "temporal": 0.9262229929747119,
+        "spatial": 1.0,
+        "manoeuvre": 0.9283154121863799,
+        "smoothness": 0.9896755603992997
+      },
+      "min_cpa_m": 916.3710359872468,
+      "arrival_source": "interpolated_goal_crossing",
+      "manoeuvre_details": {
+        "manoeuvre_count": 10,
+        "manoeuvre_rate": 0.021505376344086023,
+        "manoeuvre_score": 0.9283154121863799
+      },
+      "compliance_breakdown": [
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 26,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_port_toward_contact",
+          "label": "P port toward contact",
+          "at": 26,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 27,
+          "deduction": -0.15
+        },
+        {
+          "code": "P_port_toward_contact",
+          "label": "P port toward contact",
+          "at": 27,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 28,
+          "deduction": -0.15
+        },
+        {
+          "code": "B_17c",
+          "label": "B 17c",
+          "at": 29,
+          "deduction": -0.15
+        }
+      ],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 308.87280832586816,
+            "tcpa": 697.6377856441604,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 271.96469251858764,
+            "risk_horizon_s": 574.4974861069497,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 26
+        },
+        {
+          "code": "P_port_toward_contact",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 308.87280832586816,
+            "tcpa": 697.6377856441604,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 271.96469251858764,
+            "risk_horizon_s": 574.4974861069497,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 26
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 312.28678072947605,
+            "tcpa": 611.0469669777809,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 273.9010776848491,
+            "risk_horizon_s": 522.2057790009808,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 27
+        },
+        {
+          "code": "P_port_toward_contact",
+          "inferred_action": "turn_left",
+          "ground_truth": {
+            "cpa": 312.28678072947605,
+            "tcpa": 611.0469669777809,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 273.9010776848491,
+            "risk_horizon_s": 522.2057790009808,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 27
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 275.89842169095516,
+            "tcpa": 564.7544302380219,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 275.00220550873394,
+            "risk_horizon_s": 498.7324294422755,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 28
+        },
+        {
+          "code": "B_17c",
+          "inferred_action": "turn_right",
+          "ground_truth": {
+            "cpa": 408.38254843669097,
+            "tcpa": 575.0554550632263,
+            "band": "early",
+            "kind": "crossing",
+            "role": "stand_on",
+            "relative_bearing": 273.4068943385154,
+            "risk_horizon_s": 547.0882981601062,
+            "contact": "IMAZU_TS2",
+            "recorded_role": null,
+            "recorded_risk": null,
+            "recorded_requires_action": false
+          },
+          "step": 29
+        }
+      ],
+      "inferred_action_counts": {
+        "hold_course": 124,
+        "slow_down": 5,
+        "turn_left": 13,
+        "turn_right": 9,
+        "speed_up": 5
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_21/telemetry.jsonl"
+    },
+    {
+      "case": 22,
+      "composite_score": 0.2,
+      "verdict": "FAIL -- did not reach the goal",
+      "axes": {
+        "safety": 1.0,
+        "compliance": 1.0,
+        "citation": 0.0,
+        "temporal": 0.0,
+        "spatial": 0.0,
+        "manoeuvre": 0.9933862433862434,
+        "smoothness": 0.9769901904707424
+      },
+      "min_cpa_m": 1336.883920133226,
+      "arrival_source": "not_arrived",
+      "manoeuvre_details": {
+        "manoeuvre_count": 7,
+        "manoeuvre_rate": 0.001984126984126984,
+        "manoeuvre_score": 0.9933862433862434
+      },
+      "compliance_breakdown": [],
+      "citation_details": {
+        "score": 0.0,
+        "decision_source": "oow_decision",
+        "oracle_cycles": 0,
+        "decision_cycles": 0,
+        "missing_decision_cycles": 0,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "macro_f1": 0.0,
+        "records": []
+      },
+      "findings": [],
+      "inferred_action_counts": {
+        "hold_course": 140,
+        "slow_down": 10,
+        "speed_up": 4,
+        "turn_right": 1015,
+        "turn_left": 8
+      },
+      "explanation_compliance": null,
+      "action_source": "heading/speed reconstruction",
+      "source": "logs/evaluations/imazu/moos_ivp_colregs_baseline_12nm/case_22/telemetry.jsonl"
+    }
+  ]
+}

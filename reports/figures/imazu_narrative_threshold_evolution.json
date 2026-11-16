@@ -1,0 +1,41 @@
+{
+  "figure": "Narrative sub-500 m encounter evolution",
+  "frame": "North-up, translated to own-ship position at each snapshot; no rotation",
+  "trail": "Last 14 recorded bridge snapshots through the displayed cycle",
+  "safe_distance_m": 500,
+  "cases": {
+    "4": {
+      "contact": "IMAZU_TS1",
+      "cycles": [
+        95,
+        120,
+        128
+      ],
+      "clearance_m": 301.223
+    },
+    "12": {
+      "contact": "IMAZU_TS2",
+      "cycles": [
+        21,
+        40,
+        46
+      ],
+      "clearance_m": 459.277
+    },
+    "13": {
+      "contact": "IMAZU_TS3",
+      "cycles": [
+        95,
+        114,
+        119
+      ],
+      "clearance_m": 296.141
+    }
+  },
+  "sources": [
+    "/home/lpagg/projects/moos-llm/logs/evaluations/imazu/base_narrative_matched_warp5_rerun/case_04/audit.jsonl",
+    "/home/lpagg/projects/moos-llm/logs/evaluations/imazu/base_narrative_matched_warp5_rerun/case_12/audit.jsonl",
+    "/home/lpagg/projects/moos-llm/logs/evaluations/imazu/base_narrative_matched_warp5_rerun/case_13/audit.jsonl"
+  ],
+  "note": "All positions, headings, CPA/TCPA values, and actions come from audit logs. No trajectory smoothing or unobserved-state interpolation."
+}

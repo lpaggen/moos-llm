@@ -1,0 +1,10 @@
+// Den Helder / Texel background.
+// Geographic bounds used for tms2geotiff.py.
+
+datum_lat = 53.02500000
+datum_lon = 4.80000000
+
+lat_north = 53.20000000
+lat_south = 52.85000000
+lon_west  = 4.55000000
+lon_east  = 5.05000000

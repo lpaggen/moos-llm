@@ -1,0 +1,88 @@
+<tag><origin_warp>
+MOOSTimeWarp = $(WARP)
+LatOrigin  = 51.88621810
+LongOrigin = 4.44159844
+
+<tag><pHostInfo>
+//--------------------------------------------------
+// pHostInfo Config Block
+
+ProcessConfig = pHostInfo
+{
+  AppTick 	= 1
+  CommsTick = 1
+
+  default_hostip_force = $(IP_ADDR=localhost)
+}
+
+<tag><pShare>
+//--------------------------------------------------
+// pShare Config Block
+
+ProcessConfig = pShare
+{
+  AppTick    = 2
+  CommsTick  = 2
+
+  input = route = localhost:$(PSHARE_PORT)
+}
+
+<tag><uProcessWatch>
+//--------------------------------------------------
+// uProcessWatch Config Block
+
+ProcessConfig = uProcessWatch
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  allow_retractions = true
+  
+  watch_all = true      // default is true
+  nowatch = uMAC*
+  nowatch = uXMS*
+  nowatch = uPokeDB*
+  nowatch = uQueryDB*
+
+  summary_wait = 12
+}
+
+
+<tag><uSimMarine>
+//------------------------------------------------------
+// uSimMarineV22 Config Block
+
+ProcessConfig = uSimMarineV22
+{
+  AppTick   = 10
+  CommsTick = 10
+
+  start_pos = $(START_POS), 0
+  sim_pause = $(START_PAUSED:=false)
+  prefix    = NAV
+
+	//app_logging = true
+	max_speed   = $(MAX_SPD)
+	// Match pMarinePID: thrust = speed * SPEED_FACTOR, so the simulator
+	// must use speed = thrust / SPEED_FACTOR rather than its default 20.
+	thrust_factor = $(SPEED_FACTOR)
+	
+	// Medium-large ship profile. In uSimMarineV22, turn_rate=1.2 gives
+	// approximately a 120 m hard-over radius with the linear thrust map.
+	turn_rate = 2.5
+	turn_spd_loss = 0.5
+
+	post_des_thrust = DESIRED_THRUSTX
+	post_des_rudder = DESIRED_RUDDERX
+
+  max_acceleration = 0.20  // m/s²
+  max_deceleration = 0.15  // m/s²
+
+	post_navpos_summary = true
+	
+  //rotate_speed = 0.012
+  //drift_x      = 0.0045
+
+  //thrust_map = -100:-2, 0:0, 20:1, 40:2, 60:3, 80:5, 100:5
+  //thrust_map = -100:-2, 0:0, 20:1, 40:2, 60:3, 80:5, 100:5
+}

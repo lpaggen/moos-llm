@@ -1,0 +1,9 @@
+{
+  "requests": 4,
+  "estimated_input_tokens": 42540,
+  "maximum_output_tokens": 20000,
+  "model": "gpt-6.1-sol",
+  "estimated_input_cost_usd": 0.08508,
+  "maximum_output_cost_usd": 0.2,
+  "maximum_total_cost_usd": 0.28508
+}

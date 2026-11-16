@@ -1,0 +1,9 @@
+{
+  "requests": 10,
+  "estimated_input_tokens": 44635,
+  "pricing_mode": "standard_direct_api",
+  "model": "gpt-6.1-sol",
+  "input_rate_per_million": 2.0,
+  "output_rate_per_million": 10.0,
+  "estimated_input_cost_usd": 0.08927
+}

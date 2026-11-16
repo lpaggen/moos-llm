@@ -1,0 +1,221 @@
+{
+  "additionalProperties": false,
+  "description": "Minimal operational payload delivered to the captain.",
+  "properties": {
+    "type": {
+      "const": "vhf_advisory",
+      "default": "vhf_advisory",
+      "title": "Type",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "message_id": {
+      "format": "uuid",
+      "title": "Message Id",
+      "type": "string"
+    },
+    "speaker": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Speaker"
+    },
+    "addressee": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Addressee"
+    },
+    "addressed_to_own_ship": {
+      "default": false,
+      "title": "Addressed To Own Ship",
+      "type": "boolean"
+    },
+    "source_type": {
+      "default": "unknown",
+      "enum": [
+        "vessel",
+        "vts",
+        "unknown"
+      ],
+      "title": "Source Type",
+      "type": "string"
+    },
+    "identity_status": {
+      "default": "unverified",
+      "enum": [
+        "verified",
+        "ambiguous",
+        "unverified"
+      ],
+      "title": "Identity Status",
+      "type": "string"
+    },
+    "message": {
+      "title": "Message",
+      "type": "string"
+    },
+    "intent": {
+      "enum": [
+        "distress",
+        "urgency",
+        "safety_broadcast",
+        "collision_warning",
+        "position_report",
+        "request_entry",
+        "request_departure",
+        "request_information",
+        "maneuver_request",
+        "traffic_information",
+        "instruction",
+        "acknowledgement",
+        "conversation",
+        "unknown"
+      ],
+      "title": "Intent",
+      "type": "string"
+    },
+    "requested_action": {
+      "default": "none",
+      "enum": [
+        "none",
+        "maintain_course",
+        "alter_course",
+        "rejoin_route",
+        "set_speed",
+        "stop",
+        "resume",
+        "proceed",
+        "skip"
+      ],
+      "title": "Requested Action",
+      "type": "string"
+    },
+    "requested_turn_direction": {
+      "default": "none",
+      "enum": [
+        "none",
+        "port",
+        "starboard"
+      ],
+      "title": "Requested Turn Direction",
+      "type": "string"
+    },
+    "requested_turn_degrees": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 60.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Requested Turn Degrees"
+    },
+    "requested_speed_knots": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Requested Speed Knots"
+    },
+    "requested_course_degrees": {
+      "anyOf": [
+        {
+          "maximum": 359,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Requested Course Degrees"
+    },
+    "directive_lifetime": {
+      "default": "transient",
+      "enum": [
+        "transient",
+        "until_cancelled",
+        "until_condition_met"
+      ],
+      "title": "Directive Lifetime",
+      "type": "string"
+    },
+    "directive_end_condition": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Directive End Condition"
+    },
+    "reported_facts": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reported Facts",
+      "type": "array"
+    },
+    "recommended_action": {
+      "enum": [
+        "none",
+        "stop",
+        "resume"
+      ],
+      "title": "Recommended Action",
+      "type": "string"
+    },
+    "confidence": {
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "clarification_required": {
+      "title": "Clarification Required",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "message_id",
+    "message",
+    "intent",
+    "recommended_action",
+    "confidence",
+    "clarification_required"
+  ],
+  "title": "VHFAdvisory",
+  "type": "object"
+}

@@ -1,0 +1,68 @@
+{
+  "created_utc": "2026-11-16T13:11:58.332503+00:00",
+  "offline": true,
+  "language_model_grading": false,
+  "state_selection": "first retrieval event with routing.method=numeric_observations_only per case",
+  "scenarios": 22,
+  "cards": 503,
+  "pooled_state_card_pairs": 137,
+  "methods": [
+    "bm25",
+    "bge_dense",
+    "rrf",
+    "rrf_preferences"
+  ],
+  "top_k": 2,
+  "min_score": 5.0,
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "embedding_model_revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+  "anonymization_seed": 20261116,
+  "environment": {
+    "python": "3.11.15",
+    "numpy": "2.3.5",
+    "sentence_transformers": "6.0.1",
+    "transformers": "5.13.1",
+    "torch": "2.11.0"
+  },
+  "sources": {
+    "log_root": "logs/evaluations/imazu/maib_lesson_cards_captain_review_prompt_fixed_full_warp5",
+    "cards": "accidents/cards_decision_style_curated/cards.retained.jsonl",
+    "cards_sha256": "2523ef4b019dce48bdf9b0826f6bc73dd289a8646770383aed0204b1a715a292",
+    "audit_sha256": {
+      "imazu-01": "1b62d74eeafdc27755c8781da843be8162a475a0c8b9c50c50f621375b50771b",
+      "imazu-02": "c2d70366fe2bfa825238d39e74248235d91535a2dd9b813d052595aa284dafb5",
+      "imazu-03": "373ac28dac3401410a4578fe1830dd3e9bb34772a7cef9479c6726be39a3e60e",
+      "imazu-04": "16eceda18bc3e97e7561071dd658edf6be80f471a2c45dbc71d010abe37c61d8",
+      "imazu-05": "31a49e5eebf3208c587ccab06a4592eac8a18cc3c432d65401972ed1c6c85e4b",
+      "imazu-06": "da6d0f1272160b132bcdb3bf9367f84fbd16b4df563e043e5bedc1608448e1d5",
+      "imazu-07": "cb727b06e86607435bc1f91852fe8667549c251381aa49004950a25e1a027a65",
+      "imazu-08": "38e9fe770cb997a7f3d7babc9f4bdb8d995fad6d8f217d9fb4635f9d9d2142f1",
+      "imazu-09": "551ecdcbf450f548f88221b722c4a4b02821164c021df4bd641f6121f33c82ab",
+      "imazu-10": "419d8e600111ac35a8a9046e176e13d76434b1400ea2b1ec5e10087080033686",
+      "imazu-11": "6429ec73e53e8afe46071fc4bce3a72ca076894d485ee387344e06b5613b2c52",
+      "imazu-12": "ec3ee05d4762b27f1680ad523b231058b33d4efbd9a6060e868511e952c7dfc9",
+      "imazu-13": "dee5099a38806f41f7a6ce93fa78c225604d273143c5be150de5aef424f6d5e9",
+      "imazu-14": "3e8ca52d0cfe94a47e37c222eb1e59b9cc030385f92b715dca1bb85e1c15c16c",
+      "imazu-15": "7a0f82156698df66dc0327cce4fdd4cd86702d245e9e31514a65b05e4dc74af9",
+      "imazu-16": "e41d6976cccdccaa6f779a2f1a8b7bd824a6a34cafb2511a769485189274f0bd",
+      "imazu-17": "f69a94c89590a698e2a6d931bbef77a970bc17cea35c85efab6c0dcf1df4fa50",
+      "imazu-18": "664e7a06ebea0ccaff7a79e3ba827775a7b58c92b365e31d1300a8cdde42d083",
+      "imazu-19": "0c94b2ca89600bd2505e6ced4faf9f2771277f348ee987fe5d03d8055b8bb63c",
+      "imazu-20": "b7d61f5e0be03567fd6ba11e29e6253f3db0c8ea5f00d06c9a5ab3a5f9dd4574",
+      "imazu-21": "1894745f255f63f149dea9e76fb0b981219c19f94577bc7c826c2387de9ad5dd",
+      "imazu-22": "af50ead63ec2df3aaec2c604b22e46165c38cc34b5c47b499387a54b9c586464"
+    },
+    "retriever_source_sha256": "e326db88a3175d5573cc18302459e608f42c234b11e832e96cff65679e7dfeab",
+    "evaluation_script_sha256": "f07f2a6be1d45c564d23b74378a3afa56c31be4272aecb6999c79c8daab8e1f8"
+  },
+  "artifacts": {
+    "index": "reports/maib_state_retrieval_benchmark/final_503_cards.index.jsonl",
+    "index_sha256": "b964b46b93b1582bbef3e7d5024eb1dfc7d4b0f1fe07c77a7e70d695e29b6aaf",
+    "embeddings": "reports/maib_state_retrieval_benchmark/final_503_cards.embeddings.npy",
+    "embeddings_sha256": "d6275e532edd04e762172e48c755993fa42654d2dcff7b325c6e6c1e2df128ac",
+    "selected_states_sha256": "ab606d00f3e4458e9edfd957ed9759c9c11997e7e3c16eb0eef6ad43961e031a",
+    "rankings_sha256": "7109ab2a2a92111171c48918c047fc9bf709ae745f56ecb9cf1e55c92e9e6ed3",
+    "label_sheet_sha256_before_annotation": "f7939dec4e5d657923e3e321e9adac566455e8217101eba94f4e9fed816a1057",
+    "private_pool_key_sha256": "db1f32d927f7ccad125e7bc2769d6117cf816d482c07d0a95fbc08a4b71bbf10"
+  }
+}

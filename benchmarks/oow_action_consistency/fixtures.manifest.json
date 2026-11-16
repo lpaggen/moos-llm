@@ -1,0 +1,11 @@
+{
+  "fixtures": 10,
+  "seed": 20261112,
+  "variant": "Base narrative (combined reruns)",
+  "reference_actions": {
+    "alter_course": 4,
+    "maintain_course": 4,
+    "rejoin_route": 2
+  },
+  "fixtures_sha256": "5b387948bfcace6a396de9c7ae964d9dad31a179528b68616400b39c3f44205b"
+}

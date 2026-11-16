@@ -1,0 +1,314 @@
+{
+  "additionalProperties": false,
+  "description": "Structured output produced by the VHF interpretation model.",
+  "properties": {
+    "speaker": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Named transmitting station after 'this is', when stated.",
+      "title": "Speaker"
+    },
+    "addressee": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Station called before 'this is', when stated.",
+      "title": "Addressee"
+    },
+    "addressed_to_own_ship": {
+      "default": false,
+      "description": "True when the stated addressee matches operational_context.own_ship.",
+      "title": "Addressed To Own Ship",
+      "type": "boolean"
+    },
+    "source_type": {
+      "default": "unknown",
+      "enum": [
+        "vessel",
+        "vts",
+        "unknown"
+      ],
+      "title": "Source Type",
+      "type": "string"
+    },
+    "identity_status": {
+      "default": "unverified",
+      "enum": [
+        "verified",
+        "ambiguous",
+        "unverified"
+      ],
+      "title": "Identity Status",
+      "type": "string"
+    },
+    "intent": {
+      "description": "Honor explicit SMCP markers: WARNING about navigation danger is collision_warning, INFORMATION is traffic_information, INSTRUCTION is instruction, and REQUEST for a manoeuvre is maneuver_request. request_information applies only when the speaker asks for information.",
+      "enum": [
+        "distress",
+        "urgency",
+        "safety_broadcast",
+        "collision_warning",
+        "position_report",
+        "request_entry",
+        "request_departure",
+        "request_information",
+        "maneuver_request",
+        "traffic_information",
+        "instruction",
+        "acknowledgement",
+        "conversation",
+        "unknown"
+      ],
+      "title": "Intent",
+      "type": "string"
+    },
+    "location": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Location"
+    },
+    "destination": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Destination"
+    },
+    "heading_degrees": {
+      "anyOf": [
+        {
+          "maximum": 359,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Heading Degrees"
+    },
+    "speed_knots": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Speed Knots"
+    },
+    "normalized_message": {
+      "title": "Normalized Message",
+      "type": "string"
+    },
+    "requested_action": {
+      "default": "none",
+      "description": "Requested control using the current navigation action vocabulary.",
+      "enum": [
+        "none",
+        "maintain_course",
+        "alter_course",
+        "rejoin_route",
+        "set_speed",
+        "stop",
+        "resume",
+        "proceed",
+        "skip"
+      ],
+      "title": "Requested Action",
+      "type": "string"
+    },
+    "requested_turn_direction": {
+      "default": "none",
+      "description": "Port/starboard only for requested_action=alter_course.",
+      "enum": [
+        "none",
+        "port",
+        "starboard"
+      ],
+      "title": "Requested Turn Direction",
+      "type": "string"
+    },
+    "requested_turn_degrees": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 60.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Requested Turn Degrees"
+    },
+    "requested_speed_knots": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Requested Speed Knots"
+    },
+    "requested_course_degrees": {
+      "anyOf": [
+        {
+          "maximum": 359,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Requested Course Degrees"
+    },
+    "directive_lifetime": {
+      "default": "transient",
+      "description": "How long an explicit instruction or request remains operationally active. Use until_cancelled only for wording such as until further notice or await further instructions; use until_condition_met only when the transmission states an observable terminating condition.",
+      "enum": [
+        "transient",
+        "until_cancelled",
+        "until_condition_met"
+      ],
+      "title": "Directive Lifetime",
+      "type": "string"
+    },
+    "directive_end_condition": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Literal cancellation condition stated by the transmission. Required for until_condition_met; otherwise null.",
+      "title": "Directive End Condition"
+    },
+    "reported_facts": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reported Facts",
+      "type": "array"
+    },
+    "corrections": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Corrections",
+      "type": "array"
+    },
+    "ambiguities": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Ambiguities",
+      "type": "array"
+    },
+    "missing_critical_information": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Critical Information",
+      "type": "array"
+    },
+    "relay_required": {
+      "description": "True only for a clear stop/hold order or a clear release to resume while operational_context.currently_paused is true.",
+      "title": "Relay Required",
+      "type": "boolean"
+    },
+    "recommended_action": {
+      "default": "none",
+      "description": "stop for a clear hold; resume for a clear proceed/release while currently paused; otherwise none.",
+      "enum": [
+        "none",
+        "stop",
+        "resume"
+      ],
+      "title": "Recommended Action",
+      "type": "string"
+    },
+    "relay_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Relay Reason"
+    },
+    "confidence": {
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "clarification_required": {
+      "title": "Clarification Required",
+      "type": "boolean"
+    },
+    "suggested_clarification": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Suggested Clarification"
+    }
+  },
+  "required": [
+    "intent",
+    "normalized_message",
+    "relay_required",
+    "confidence",
+    "clarification_required"
+  ],
+  "title": "VHFInterpretation",
+  "type": "object"
+}

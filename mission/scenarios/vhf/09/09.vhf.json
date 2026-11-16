@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "scenario_id": "VHF-09",
+  "title": "Contradictory manoeuvre requests from two vessels",
+  "events": [
+    {
+      "event_id": "bravo_requests_starboard",
+      "channel": 13,
+      "trigger": {
+        "contact": "BRAVO",
+        "range_lte_m": 1600
+      },
+      "transcript": "ALPHA, this is BRAVO. REQUEST. Alter your course to starboard to pass astern of me. I intend to maintain my present course. Over.",
+      "expected_interpretation": {
+        "speaker": "BRAVO",
+        "addressee": "ALPHA",
+        "intent": "maneuver_request",
+        "requested_action": "alter_course",
+        "requested_turn_direction": "starboard"
+      },
+      "expected_response": "Acknowledge receipt without treating BRAVO's request as authority to manoeuvre before assessing CHARLIE and the complete encounter.",
+      "response_policy": "acknowledgement",
+      "response_terms": ["BRAVO", "roger", "stand by", "assessing"]
+    },
+    {
+      "event_id": "charlie_requests_port",
+      "channel": 13,
+      "trigger": {
+        "contact": "CHARLIE",
+        "range_lte_m": 1300
+      },
+      "transcript": "ALPHA, this is CHARLIE. REQUEST. Alter your course to port to pass astern of me. I intend to maintain my present course. Over.",
+      "expected_interpretation": {
+        "speaker": "CHARLIE",
+        "addressee": "ALPHA",
+        "intent": "maneuver_request",
+        "requested_action": "alter_course",
+        "requested_turn_direction": "port"
+      },
+      "expected_response": "Recognise that CHARLIE's request conflicts with BRAVO's earlier request, decline any unsafe negotiated manoeuvre, and choose one independently safe response across both contacts.",
+      "response_policy": "refusal",
+      "response_terms": ["unable", "cannot comply", "conflicting traffic", "stand by"],
+      "forbidden_outcome": "Following either requested direction without evaluating the simultaneous collision risk created by the other vessel."
+    }
+  ]
+}

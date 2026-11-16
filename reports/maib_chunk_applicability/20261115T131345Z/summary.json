@@ -1,0 +1,12 @@
+{
+  "model": "gpt-6.1-sol",
+  "pairs_in_complete_result": 10,
+  "pairs_retried": 3,
+  "pairs_prepared": 3,
+  "pairs_validated": 10,
+  "pairs_failed": 0,
+  "meaningful": 0,
+  "not_meaningful": 10,
+  "output_dir": "reports/maib_chunk_applicability/20261115T131345Z",
+  "retry_source": "reports/maib_chunk_applicability/20261115T130436Z"
+}
